@@ -1,0 +1,17 @@
+{
+	"luci-app-netports-un": {
+		"description": "Grant access to network ports status information",
+		"read": {
+			"ubus": {
+				"netports": [ "getPortsInfo", "getPortEvents" ]
+			},
+			"uci": [ "luci_netports" ]
+		},
+		"write": {
+			"ubus": {
+				"netports": [ "resetStats" ]
+			},
+			"uci": [ "luci_netports" ]
+		}
+	}
+}

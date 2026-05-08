@@ -1,0 +1,345 @@
+/* luci-app-netports-un — UN branding (cascade.css) compatible
+ *
+ * Vše navázané na CSS proměnné UN bootstrap themu:
+ *   --brand-primary-medium   hlavní teal #005a6f      (info, odkazy)
+ *   --brand-primary-light    světlejší teal           (hover/highlight)
+ *   --brand-accent           limetková #b3d236        (OK / success)
+ *   --success-color-medium   = brand-accent
+ *   --success-color-low      tmavší limetka #91a92b  (text na světlém pozadí)
+ *   --error-color-medium     #bf4e4c                  (chyba, problém)
+ *   --error-color-low        #b14946                  (tmavší pro text)
+ *   --text-color-high/low    primární / muted text
+ *   --background-color-high/medium/low
+ *   --border-color-medium
+ *   --radius-sm  (6px), --radius-md (10px), --radius-lg (16px)
+ */
+
+/* ----- Base table layout (zachová LuCI vzhled) -------------------- */
+.netports-table{width:100%;min-width:1100px}
+.netports-table .td,.netports-table .th{line-height:1.35em;padding:6px 10px;vertical-align:top}
+.netports-table .th{font-weight:600}
+
+.netports-tablewrap{overflow-x:auto;width:100%}
+
+@media (max-width:1280px){.netports-table{min-width:980px}}
+@media (max-width:900px){.netports-table{min-width:760px}}
+@media (max-width:600px){.netports-table{min-width:560px}}
+
+/* ----- Linkstatus icon + text (původní layout) -------------------- */
+.netports-linkstatus-icon-container{width:42px;position:relative}
+.netports-linkstatus-icon{display:inline-block;max-width:100%;width:100%;height:auto}
+.netports-linkstatus-icon-container-v{float:left;margin-right:8px}
+.netports-linkstatus-text{white-space:nowrap}
+
+.netports-ifacebox,.netports-ifacebox-head{width:-webkit-fit-content!important}
+.netports-ifacebox{display:block;min-width:auto;margin:0;padding:0}
+.netports-ifacebox-head{padding-right:8px;padding-left:8px;text-align:center;min-width:100px}
+.netports-ifacebox-head a{color:inherit}
+
+.netports-title{text-align:left;justify-content:space-between;display:flex;flex-flow:row-reverse;align-items:flex-end}
+.netports-copyright{color:var(--text-color-low,#888);font-size:85%;white-space:nowrap;margin:0}
+.netports-copyright a{color:inherit;text-decoration:none}
+.netports-copyright a:hover{color:var(--text-color-high);text-decoration:underline}
+
+.netports-buttons{display:flex;flex-flow:row-reverse;margin:0 6px 0 0;padding:0;align-items:flex-end}
+.netports-buttons button{margin-bottom:8px;margin-right:4px;height:24px;display:inline-flex;
+	background:var(--default-btn-background,linear-gradient(#fff,#fff 25%,#e6e6e6) no-repeat);
+	border:1px solid var(--border-color-medium);
+	border-radius:var(--radius-sm,6px);
+	box-shadow:0 1px 2px rgba(0,0,0,.06);
+	padding:0 10px}
+.netports-buttons button:disabled{opacity:.6}
+.netports-buttons button svg{width:16px;height:16px;vertical-align:middle;
+	fill:var(--text-color-high,#333)}
+.netports-buttons button:hover svg{fill:var(--brand-primary-medium,#005a6f)}
+.netports-buttons button:disabled svg{fill:var(--text-color-low,#aaa)}
+
+.netports-resetinfo{color:var(--text-color-low,#888);font-size:85%;margin-right:8px;align-self:center}
+
+/* ----- Sub-title pod hlavičkou (např. "(příchozí pakety)") -------- */
+.netports-th-sub{display:block;color:var(--text-color-low,#888);font-size:85%;font-weight:normal;margin-top:1px}
+
+/* ----- State texts (Připojeno) ----------------------------------- */
+.netports-state-up{color:var(--text-color-high,#333)}
+.netports-state-since{display:block;color:var(--text-color-low,#888);font-size:90%;margin-top:1px}
+
+/* ----- Stavový badge (rychlost / Odpojeno / Vypnuto) -------------
+ * Sjednocený vizuál: barevný box, LuCI radius, čitelný kontrast.
+ * Použití: speed (1000/100/10) i state (bad/off) přes stejnou třídu. */
+.netports-speed-row{display:block}
+.netports-speed,
+.netports-statebox{
+	display:inline-block;
+	padding:1px 8px;
+	border-radius:var(--radius-sm,6px);
+	font-weight:600;
+	font-size:90%;
+	line-height:1.5em;
+	letter-spacing:.2px;
+}
+.netports-speed-1000  {background:var(--brand-accent,#b3d236);color:var(--brand-primary-dark,#003845)}
+.netports-speed-100   {background:#e6b800;color:#fff}
+.netports-speed-10    {background:#f0ad4e;color:#fff}
+.netports-speed-other {background:var(--text-color-low,#888);color:#fff}
+
+.netports-statebox-bad{background:var(--error-color-medium,#bf4e4c);color:#fff}
+.netports-statebox-off{background:var(--text-color-low,#888);color:#fff}
+
+.netports-duplex{display:block;margin-top:2px}
+
+/* ----- Flap badge pod ikonou ------------------------------------- */
+.netports-flap{display:block;margin-top:6px;font-size:90%}
+.netports-flap-ok  {color:var(--success-color-low,#7d8f1f)}
+.netports-flap-warn{color:#c80;font-weight:600}
+.netports-flap-bad {color:var(--error-color-medium,#bf4e4c);font-weight:600;
+	animation:netports-pulse 1.2s infinite}
+.netports-flap-off {color:var(--text-color-low,#888)}
+.netports-flap-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+	margin-right:4px;vertical-align:middle}
+.netports-flap-dot-ok  {background:var(--success-color-medium,#a2bd30)}
+.netports-flap-dot-warn{background:#c80}
+.netports-flap-dot-bad {background:var(--error-color-medium,#bf4e4c);
+	box-shadow:0 0 5px rgba(191,78,76,.6);animation:netports-pulse 1.2s infinite}
+.netports-flap-dot-off {background:var(--text-color-low,#888)}
+.netports-flap-detail{display:block;color:var(--text-color-low,#888);font-weight:normal;font-size:90%}
+.netports-flap-link{display:block;margin-top:2px}
+.netports-flap-link a{color:var(--brand-primary-medium,#005a6f);text-decoration:none;cursor:pointer}
+.netports-flap-link a:hover{text-decoration:underline}
+
+@keyframes netports-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Pulzující rámeček ikony při flapování (jediný outline na ikoně) */
+.netports-linkstatus-icon-flapping{outline:2px solid var(--error-color-medium,#bf4e4c);
+	outline-offset:1px;border-radius:var(--radius-sm,6px);animation:netports-pulse 1.2s infinite}
+
+/* ----- Errors block embedded in RX/TX cells ---------------------- */
+.netports-errblock{display:block;margin-top:6px;padding-top:4px;
+	border-top:1px dashed var(--border-color-medium,#ddd);
+	color:var(--error-color-medium,#bf4e4c);font-family:monospace}
+.netports-errblock-ok{display:block;margin-top:6px;padding-top:4px;
+	border-top:1px dashed var(--border-color-medium,#ddd);
+	color:var(--success-color-low,#7d8f1f);font-style:italic;font-size:90%}
+.netports-errblock-row{display:block;line-height:1.45em;cursor:help}
+.netports-errblock-name{display:inline-block;min-width:6.2em;color:var(--text-color-low,#666);font-weight:normal}
+.netports-errblock-val {display:inline-block;min-width:3.5em;text-align:right;font-weight:bold}
+.netports-errblock-delta{display:inline-block;margin-left:6px;color:var(--error-color-medium,#bf4e4c);font-weight:bold}
+
+/* =================================================================
+ * Detail modal — UN branding dashboard
+ * Používá výhradně CSS proměnné UN bootstrap themu, takže ladí
+ * s celou aplikací včetně tmavého režimu.
+ * ================================================================= */
+.netports-modal{
+	background: var(--background-color-medium);
+	color: var(--text-color-high);
+	margin: -10px;
+	padding: 20px;
+	border-radius: var(--radius-lg, 16px);
+	max-width: 920px;
+}
+
+/* ---------- Sekce h4 (s barevným proužkem před textem) ---------- */
+.netports-modal h4{
+	margin: 18px 0 10px;
+	padding: 0 0 0 12px;
+	border: none;
+	border-left: 4px solid var(--text-color-low, #888);
+	border-radius: 2px;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: .2px;
+	color: var(--text-color-high);
+	line-height: 1.4em;
+}
+.netports-modal h4:first-child{margin-top:0}
+.netports-modal-h-critical{
+	border-left-color: var(--error-color-medium, #bf4e4c);
+	color: var(--error-color-low, #b14946);
+}
+.netports-modal-h-info{
+	border-left-color: var(--brand-primary-medium, #005a6f);
+	color: var(--brand-primary-medium, #005a6f);
+}
+
+/* Note - krátký vysvětlující odstavec (nad info tabulkou) */
+.netports-modal-note{
+	background: rgba(0, 90, 111, 0.07);
+	border: 1px solid rgba(0, 90, 111, 0.18);
+	border-radius: var(--radius-md, 10px);
+	color: var(--text-color-high);
+	padding: 10px 14px;
+	font-size: 12px;
+	font-style: normal;
+	margin: 0 0 12px 0;
+	line-height: 1.5em;
+}
+
+/* ---------- Top stat cards ---------- */
+.netports-modal-summary{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 12px;
+	margin: 0 0 18px 0;
+}
+.netports-statcard{
+	background: var(--background-color-high);
+	border: 1px solid var(--border-color-medium);
+	border-radius: var(--radius-lg, 16px);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+	padding: 14px 16px;
+	transition: transform .15s ease, box-shadow .15s ease;
+}
+.netports-statcard:hover{
+	transform: translateY(-1px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+}
+.netports-statcard .label{
+	display: block;
+	color: var(--text-color-low);
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .5px;
+	margin-bottom: 6px;
+}
+.netports-statcard .value{
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--text-color-high);
+	line-height: 1.3em;
+}
+.netports-statcard .value.mono{font-family: monospace; font-size: 16px}
+.netports-statcard-wide{grid-column: 1 / -1}
+
+/* Akcenty karet - levý proužek + jemný gradient + barva hodnoty */
+.netports-statcard-ok{
+	border-left: 4px solid var(--brand-accent, #b3d236);
+	background: linear-gradient(180deg,
+		rgba(179, 210, 54, 0.16) 0%,
+		var(--background-color-high) 35%);
+}
+.netports-statcard-ok .value{color: var(--success-color-low, #7d8f1f)}
+
+.netports-statcard-warn{
+	border-left: 4px solid #d28b00;
+	background: linear-gradient(180deg,
+		rgba(210, 139, 0, 0.12) 0%,
+		var(--background-color-high) 35%);
+}
+.netports-statcard-warn .value{color: #b07300}
+
+.netports-statcard-bad{
+	border-left: 4px solid var(--error-color-medium, #bf4e4c);
+	background: linear-gradient(180deg,
+		rgba(191, 78, 76, 0.12) 0%,
+		var(--background-color-high) 35%);
+}
+.netports-statcard-bad .value{color: var(--error-color-medium, #bf4e4c)}
+
+.netports-statcard-off{
+	border-left: 4px solid var(--text-color-low, #888);
+}
+.netports-statcard-off .value{color: var(--text-color-low)}
+
+/* ---------- Tabulky chyb - clean dashboard look ---------- */
+.netports-modal-errtable{
+	background: var(--background-color-high);
+	border: 1px solid var(--border-color-medium);
+	border-radius: var(--radius-lg, 16px);
+	overflow: hidden;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin: 0 0 14px 0;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+	width: 100%;
+}
+.netports-modal-errtable th,
+.netports-modal-errtable td{
+	border: none;
+	border-bottom: 1px solid var(--border-color-medium);
+	padding: 10px 14px;
+	text-align: left;
+	vertical-align: top;
+}
+.netports-modal-errtable tr:last-child td{border-bottom: none}
+.netports-modal-errtable th{
+	background: var(--background-color-medium);
+	color: var(--text-color-low);
+	font-weight: 600;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: .5px;
+	white-space: nowrap;
+}
+.netports-modal-errtable.critical th{
+	background: rgba(191, 78, 76, 0.10);
+	color: var(--error-color-low, #b14946);
+}
+.netports-modal-errtable.info th{
+	background: rgba(0, 90, 111, 0.08);
+	color: var(--brand-primary-medium, #005a6f);
+}
+.netports-modal-errtable td.num{
+	font-family: monospace;
+	text-align: right;
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+}
+.netports-modal-errtable td.mono{
+	font-family: monospace;
+	font-weight: 600;
+	white-space: nowrap;
+}
+.netports-modal-errtable td.desc{
+	color: var(--text-color-high);
+	font-size: 12px;
+	line-height: 1.55em;
+	white-space: pre-line;
+}
+.netports-modal-errtable tr.has-errors td.mono,
+.netports-modal-errtable tr.has-errors td.num{color: var(--error-color-medium, #bf4e4c)}
+.netports-modal-errtable tr.has-errors{background: rgba(191, 78, 76, 0.06)}
+.netports-modal-errtable tbody tr:hover{background: rgba(0, 90, 111, 0.04)}
+.netports-modal-errtable tbody tr.has-errors:hover{background: rgba(191, 78, 76, 0.10)}
+
+/* ---------- Timeline událostí ---------- */
+.netports-modal-timeline{
+	background: var(--background-color-high);
+	border: 1px solid var(--border-color-medium);
+	border-radius: var(--radius-lg, 16px);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+	padding: 12px 16px;
+	max-height: 280px;
+	overflow-y: auto;
+	font-family: monospace;
+	font-size: 12px;
+	line-height: 1.7em;
+}
+.netports-modal-timeline > div{padding: 2px 0; border-bottom: 1px dashed transparent}
+.netports-modal-timeline > div:hover{border-bottom-color: var(--border-color-medium)}
+.netports-modal-timeline .ev-up  {color: var(--success-color-low, #7d8f1f); font-weight: 600}
+.netports-modal-timeline .ev-down{color: var(--error-color-medium, #bf4e4c); font-weight: 600}
+.netports-modal-timeline .ev-src {color: var(--text-color-low); font-size: 11px; margin-left: 8px}
+
+/* Empty state */
+.netports-modal-empty{
+	background: var(--background-color-high);
+	border: 1px dashed var(--border-color-medium);
+	border-radius: var(--radius-lg, 16px);
+	color: var(--text-color-low);
+	padding: 32px 20px;
+	text-align: center;
+	font-style: normal;
+	font-size: 13px;
+	line-height: 1.6em;
+}
+.netports-modal-empty::before{
+	content: "🕒";
+	display: block;
+	font-size: 28px;
+	margin-bottom: 8px;
+	opacity: .55;
+}
+
+/* ---------- Close button - LuCI button style ---------- */
+.netports-modal .right{margin-top: 16px; text-align: right}

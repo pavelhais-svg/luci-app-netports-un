@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="19" viewBox="0 0 12.7 10.05" role="img" aria-label="Ethernet Port Disabled">
+  <defs>
+    <linearGradient id="bodyGrad_dis" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#78909c"/> <stop offset="100%" stop-color="#455a64"/> </linearGradient>
+
+    <linearGradient id="metalGrad_dis" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cfd8dc"/>
+      <stop offset="50%" stop-color="#b0bec5"/>
+      <stop offset="100%" stop-color="#90a4ae"/>
+    </linearGradient>
+    
+    <linearGradient id="innerShadow_dis" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#37474f"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+    
+    </defs>
+
+  <rect x="0.35" y="0.35" width="12.0" height="9.35" rx="1.5" fill="url(#bodyGrad_dis)" stroke="#37474f" stroke-width="0.2"/>
+  
+  <rect x="1.75" y="1.8" width="9.2" height="6.3" rx="1" fill="url(#metalGrad_dis)" stroke="#78909c" stroke-width="0.2"/>
+
+  <path d="M2.55 2.5 h7.6 v4.5 c0 0.5 -0.4 0.9 -0.9 0.9 h-1.8 v-1.2 h-2.2 v1.2 h-1.8 c-0.5 0 -0.9 -0.4 -0.9 -0.9 z" fill="url(#innerShadow_dis)"/>
+
+  <g stroke="#bdbdbd" stroke-width="0.35" stroke-linecap="round" fill="none" opacity="0.8">
+    <path d="M3.9 3.3 q0 1.2 0 1.8"/>
+    <path d="M4.6 3.3 q0 1.2 0 1.8"/>
+    <path d="M5.3 3.3 q0 1.2 0 1.8"/>
+    <path d="M6.0 3.3 q0 1.2 0 1.8"/>
+    <path d="M6.7 3.3 q0 1.2 0 1.8"/>
+    <path d="M7.4 3.3 q0 1.2 0 1.8"/>
+    <path d="M8.1 3.3 q0 1.2 0 1.8"/>
+    <path d="M8.8 3.3 q0 1.2 0 1.8"/>
+  </g>
+
+  <rect x="2.0" y="8.4" width="1.4" height="0.6" rx="0.3" fill="#546e7a"/>
+  <rect x="9.3" y="8.4" width="1.4" height="0.6" rx="0.3" fill="#546e7a"/>
+  
+  <path d="M1.5 0.8 h9.7 c0.5 0 0.8 0.3 0.8 0.5 s-0.3 0 -0.8 0 H1.5 c-0.5 0 -0.8 0 -0.8 -0.5 s0.3 -0.5 0.8 -0.5 z" fill="white" opacity="0.1"/>
+</svg>

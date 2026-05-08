@@ -1,0 +1,21 @@
+# Build artefacts
+*.ipk
+*.apk
+ipkg-*/
+.pkginfo
+.pkgdir-*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local workspace
+*.bak
+*.swp
+*~
+
+# Tooling caches
+__pycache__/
+*.pyc

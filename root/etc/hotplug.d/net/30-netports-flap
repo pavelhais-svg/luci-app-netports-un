@@ -1,0 +1,31 @@
+#!/bin/sh
+# Track network port flap events for luci-app-netports-un
+# Logs to /tmp (tmpfs) - resets on reboot
+
+LOG=/tmp/netports-events.json
+MAX_LINES=2000
+
+[ -z "$INTERFACE" ] && exit 0
+
+case "$ACTION" in
+	add|register|ifup)
+		EV=up
+		;;
+	remove|unregister|ifdown)
+		EV=down
+		;;
+	*)
+		exit 0
+		;;
+esac
+
+TS=$(date +%s)
+printf '{"ts":%d,"if":"%s","ev":"%s","src":"hotplug"}\n' "$TS" "$INTERFACE" "$EV" >> "$LOG"
+
+# Rotate when too long
+LINES=$(wc -l < "$LOG" 2>/dev/null)
+if [ -n "$LINES" ] && [ "$LINES" -gt "$MAX_LINES" ]; then
+	tail -n "$MAX_LINES" "$LOG" > "$LOG.tmp" 2>/dev/null && mv "$LOG.tmp" "$LOG"
+fi
+
+exit 0

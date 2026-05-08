@@ -1,0 +1,30 @@
+# Default: detect text vs binary
+* text=auto
+
+# Vše co se má dostat na Linux target nebo do build systému - LF.
+/.gitattributes text eol=lf
+/.gitignore     text eol=lf
+*.md   text eol=lf
+*.sh   text eol=lf
+*.lua  text eol=lf
+*.js   text eol=lf
+*.css  text eol=lf
+*.json text eol=lf
+*.svg  text eol=lf
+*.po   text eol=lf
+*.pot  text eol=lf
+Makefile text eol=lf
+LICENSE  text eol=lf
+
+# Extensionless shell skripty / rpcd handlers / hotplug / uci-defaults / config.
+**/etc/init.d/*           text eol=lf
+**/etc/hotplug.d/**/*     text eol=lf
+**/etc/uci-defaults/*     text eol=lf
+**/usr/libexec/rpcd/*     text eol=lf
+**/etc/config/*           text eol=lf
+
+# Binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ipk binary

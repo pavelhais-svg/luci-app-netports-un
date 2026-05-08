@@ -1,0 +1,105 @@
+#!/bin/sh
+set -eu
+
+CFG_PKG="luci_netports"
+CFG_FILE="/etc/config/${CFG_PKG}"
+
+# 1) Vypnout LuCI "Port status" widget (29_ports.js)
+for d in /www/luci-static/resources/view/status/include /usr/share/luci-static/resources/view/status/include; do
+    [ -d "$d" ] || continue
+    if [ -f "$d/29_ports.js" ] && [ ! -f "$d/29_ports.js.disabled" ]; then
+	mv "$d/29_ports.js" "$d/29_ports.js.disabled" || true
+    fi
+done
+
+# 2) Pokud už je něco nastavené (mimo lo), nesahat
+i=0
+while :; do
+    ifname="$(uci -q get ${CFG_PKG}.@port[$i].ifname 2>/dev/null || true)"
+    [ -n "$ifname" ] || break
+
+    dis="$(uci -q get ${CFG_PKG}.@port[$i].disable 2>/dev/null || true)"
+    case "$dis" in
+	1|true|yes|on) i=$((i+1)); continue ;;
+    esac
+
+    if [ "$ifname" != "lo" ]; then
+	rm -f /etc/uci-defaults/99_luci-app-netports-un 2>/dev/null || true
+	exit 0
+    fi
+
+    i=$((i+1))
+done
+
+# 3) Helper: existuje už port s ifname?
+port_exists() {
+    uci -q show "${CFG_PKG}" 2>/dev/null | grep -q "ifname='${1}'"
+}
+
+add_port() {
+    ifname="$1"
+    ptype="${2:-auto}"
+
+    [ -d "/sys/class/net/$ifname" ] || return 0
+    port_exists "$ifname" && return 0
+
+    sid="$(uci add ${CFG_PKG} port)"
+    uci set ${CFG_PKG}.${sid}.ifname="$ifname"
+    [ -n "$ptype" ] && uci set ${CFG_PKG}.${sid}.type="$ptype"
+}
+
+# 4) Global + lo disabled (jen pokud chybí)
+[ -f "$CFG_FILE" ] || touch "$CFG_FILE"
+
+if ! uci -q get ${CFG_PKG}.global >/dev/null 2>&1; then
+    uci set ${CFG_PKG}.global=global
+    uci set ${CFG_PKG}.global.default_additional_info='1'
+    uci set ${CFG_PKG}.global.default_h_mode='1'
+    uci set ${CFG_PKG}.global.hv_mode_switch_button='1'
+fi
+
+if ! port_exists "lo"; then
+    sid="$(uci add ${CFG_PKG} port)"
+    uci set ${CFG_PKG}.${sid}.ifname="lo"
+    uci set ${CFG_PKG}.${sid}.disable="1"
+fi
+
+# 5) Pořadí: WAN -> LAN -> WiFi
+# WAN (jen pokud existuje netdev "wan")
+WAN_ADDED=0
+if [ -d /sys/class/net/wan ]; then
+    add_port "wan" "auto"
+    WAN_ADDED=1
+fi
+
+# LAN1..LAN8 (přidá jen existující)
+LAN_COUNT=0
+n=1
+while [ "$n" -le 8 ]; do
+    if [ -d "/sys/class/net/lan$n" ]; then
+	add_port "lan$n" "auto"
+	LAN_COUNT=$((LAN_COUNT+1))
+    fi
+    n=$((n+1))
+done
+
+# Fallback pro jednoportové ethernet HW:
+# pokud není "wan" a nejsou žádné "lan*", ale existuje eth0, přidej eth0
+if [ "$WAN_ADDED" -eq 0 ] && [ "$LAN_COUNT" -eq 0 ] && [ -d /sys/class/net/eth0 ]; then
+    add_port "eth0" "auto"
+fi
+
+# Wi-Fi 2G/5G/6G (jen pokud existují)
+add_port "2G" "wifi"
+add_port "5G" "wifi"
+add_port "6G" "wifi"
+
+uci commit ${CFG_PKG}
+
+# 6) Cache vyčistit ano, ale NERESTARTOVAT uhttpd/rpcd (LuCI install by spadlo na XHR)
+rm -f /tmp/luci-indexcache 2>/dev/null || true
+rm -rf /tmp/luci-modulecache/ 2>/dev/null || true
+
+# 7) Jednorázový skript odstranit
+rm -f /etc/uci-defaults/99_luci-app-netports-un 2>/dev/null || true
+exit 0

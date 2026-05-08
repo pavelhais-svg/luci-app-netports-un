@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="19" viewBox="0 0 12.7 10.05" role="img" aria-label="Ethernet Port 8-pin Small Thin">
+  <defs>
+    <linearGradient id="bodyGrad_v6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e7c86"/>
+      <stop offset="100%" stop-color="#004d55"/>
+    </linearGradient>
+
+    <linearGradient id="metalGrad_v6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    
+    <linearGradient id="innerShadow_v6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+
+    <style>
+      .led-blink { animation: blink 0.1s infinite alternate; }
+      .led-pulse { animation: pulse 1.5s infinite; }
+      @keyframes blink { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+      @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+    </style>
+  </defs>
+
+  <rect x="0.35" y="0.35" width="12.0" height="9.35" rx="1.5" fill="url(#bodyGrad_v6)" stroke="#003840" stroke-width="0.2"/>
+  
+  <rect x="1.75" y="1.8" width="9.2" height="6.3" rx="1" fill="url(#metalGrad_v6)" stroke="#475569" stroke-width="0.2"/>
+
+  <path d="M2.55 2.5 h7.6 v4.5 c0 0.5 -0.4 0.9 -0.9 0.9 h-1.8 v-1.2 h-2.2 v1.2 h-1.8 c-0.5 0 -0.9 -0.4 -0.9 -0.9 z" fill="url(#innerShadow_v6)"/>
+
+  <g stroke="#fbbf24" stroke-width="0.35" stroke-linecap="round" fill="none">
+    <path d="M3.9 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M4.6 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M5.3 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M6.0 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M6.7 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M7.4 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M8.1 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+    <path d="M8.8 3.3 q0 1.2 0 1.8" opacity="0.95"/>
+  </g>
+
+  <rect x="2.0" y="8.4" width="1.4" height="0.6" rx="0.3" fill="#f59e0b" class="led-pulse"/>
+  <rect x="9.3" y="8.4" width="1.4" height="0.6" rx="0.3" fill="#22c55e" class="led-blink"/>
+  
+  <path d="M1.5 0.8 h9.7 c0.5 0 0.8 0.3 0.8 0.5 s-0.3 0 -0.8 0 H1.5 c-0.5 0 -0.8 0 -0.8 -0.5 s0.3 -0.5 0.8 -0.5 z" fill="white" opacity="0.15"/>
+</svg>

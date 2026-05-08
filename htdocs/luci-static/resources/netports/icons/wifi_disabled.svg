@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-label="WiFi Signal Disabled WOW Silver">
+  <defs>
+    <radialGradient id="disableBodyGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#cfd8dc"/> <stop offset="100%" stop-color="#546e7a"/> </radialGradient>
+
+    <filter id="faintMoonGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.0" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.80  0 0 0 0 0.85  0 0 0 0 0.90  0 0 0 0.5 0" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#faintMoonGlow)" transform="translate(16 16)" opacity="0.6">
+    
+    <circle cx="0" cy="8" r="2.5" fill="url(#disableBodyGrad)" stroke="none"/>
+    
+    <g fill="none" stroke="url(#disableBodyGrad)" stroke-linecap="round">
+      <path d="M-4 4 q4 -3 8 0" stroke-width="2"/>
+      <path d="M-7 0 q7 -5 14 0" stroke-width="2.2"/>
+      <path d="M-10 -4 q10 -7 20 0" stroke-width="2.4"/>
+    </g>
+  </g>
+</svg>
