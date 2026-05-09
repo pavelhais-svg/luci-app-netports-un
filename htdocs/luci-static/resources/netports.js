@@ -459,10 +459,10 @@ var NetPorts = L.Class.extend({
 
 		/* ---------- columns ---------- */
 		var dataTitles = [
-			{ title: _('Název a MAC'),       vModeMinWidth: '130px',
+			{ title: _('Název a MAC'),       vModeMinWidth: '110px',
 			  cellClass: 'netports-cell-name',
 			  fmtFunc: fmtNameAndMAC,         hModeDisable: true },
-			{ title: _('Stav linky'),        vModeMinWidth: '210px',
+			{ title: _('Stav linky'),        vModeMinWidth: '170px',
 			  cellClass: 'netports-cell-status',
 			  fmtFunc: fmtStatus },
 			{ title: _('Rozhraní'),
@@ -476,10 +476,10 @@ var NetPorts = L.Class.extend({
 			  fmtFunc: fmtFwZones },
 			{ title: _('Příjem RX'),  subtitle: _('(příchozí pakety)'),
 			  cellClass: 'netports-cell-rx',
-			  vModeMinWidth: '210px',         fmtFunc: fmtRx,       hModeExtra: true },
+			  vModeMinWidth: '160px',         fmtFunc: fmtRx,       hModeExtra: true },
 			{ title: _('Odeslání TX'), subtitle: _('(odchozí pakety)'),
 			  cellClass: 'netports-cell-tx',
-			  vModeMinWidth: '210px',         fmtFunc: fmtTx,       hModeExtra: true },
+			  vModeMinWidth: '160px',         fmtFunc: fmtTx,       hModeExtra: true },
 			{ title: _('MAC adresa'),
 			  cellClass: 'netports-cell-mac',
 			  fmtFunc: fmtMAC,
