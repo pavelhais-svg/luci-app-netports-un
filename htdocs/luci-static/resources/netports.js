@@ -460,17 +460,29 @@ var NetPorts = L.Class.extend({
 		/* ---------- columns ---------- */
 		var dataTitles = [
 			{ title: _('Název a MAC'),       vModeMinWidth: '130px',
+			  cellClass: 'netports-cell-name',
 			  fmtFunc: fmtNameAndMAC,         hModeDisable: true },
 			{ title: _('Stav linky'),        vModeMinWidth: '210px',
+			  cellClass: 'netports-cell-status',
 			  fmtFunc: fmtStatus },
-			{ title: _('Rozhraní'),          fmtFunc: fmtNetIf,    hModeExtra: true },
-			{ title: _('Bridge'),            fmtFunc: fmtBridgeIf, hModeExtra: true },
-			{ title: _('Firewall zóny'),     fmtFunc: fmtFwZones },
+			{ title: _('Rozhraní'),
+			  cellClass: 'netports-cell-netif',
+			  fmtFunc: fmtNetIf,    hModeExtra: true },
+			{ title: _('Bridge'),
+			  cellClass: 'netports-cell-bridge',
+			  fmtFunc: fmtBridgeIf, hModeExtra: true },
+			{ title: _('Firewall zóny'),
+			  cellClass: 'netports-cell-fw',
+			  fmtFunc: fmtFwZones },
 			{ title: _('Příjem RX'),  subtitle: _('(příchozí pakety)'),
+			  cellClass: 'netports-cell-rx',
 			  vModeMinWidth: '210px',         fmtFunc: fmtRx,       hModeExtra: true },
 			{ title: _('Odeslání TX'), subtitle: _('(odchozí pakety)'),
+			  cellClass: 'netports-cell-tx',
 			  vModeMinWidth: '210px',         fmtFunc: fmtTx,       hModeExtra: true },
-			{ title: _('MAC adresa'),        fmtFunc: fmtMAC,
+			{ title: _('MAC adresa'),
+			  cellClass: 'netports-cell-mac',
+			  fmtFunc: fmtMAC,
 			  vModeDisable: true,             hModeExtra: true }
 		];
 
@@ -886,11 +898,13 @@ var NetPorts = L.Class.extend({
 					dataTitles.forEach(function(t) {
 						if (t.vModeDisable) return;
 						/* data-label = popisek sloupce, použito pro mobile
-						   stacked layout (CSS @media ≤720px) */
+						   stacked layout (CSS @media ≤720px). cellClass dává
+						   sémantickou třídu pro responsive layout. */
 						var dataLabel = t.title +
 							(t.subtitle ? ' ' + t.subtitle : '');
 						tcells.push(E('td', {
-							'class': 'td ' + config.tblCellClasses,
+							'class': 'td ' + config.tblCellClasses
+								+ (t.cellClass ? ' ' + t.cellClass : ''),
 							'data-label': dataLabel
 						}, t.fmtFunc(port)));
 					});

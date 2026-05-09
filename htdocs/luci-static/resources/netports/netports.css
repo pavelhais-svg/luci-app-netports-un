@@ -25,79 +25,176 @@
 @media (max-width:900px){.netports-table{min-width:760px}}
 
 /* =================================================================
- * Mobile (≤720px) — stacked karty, žádný horizontální scroll
- * Každý port = jedna karta. Buňky stacknuté pod sebou s popiskem
- * sloupce (z `data-label` JS attributu) nahoře.
+ * Mobile (≤720px) — kompaktní karta podobná stávajícímu LuCI Port
+ * status: každý port = jedna karta s 3 logickými sekcemi pod sebou.
+ *
+ *   ┌──────────────────────────────────┐
+ *   │ HEADER: ikona + jméno + speed    │  ← bez data-label, samovysvětlující
+ *   │   ● stabilní · Detail / hist ›   │
+ *   ├──────────────────────────────────┤
+ *   │ NETWORK: Rozhraní:  wan          │  ← key:value definition list
+ *   │          Bridge:    –            │
+ *   │          FW zóny:   wan          │
+ *   ├──────────────────────────────────┤
+ *   │ TRAFFIC: RX  769 MB · 787k pkt   │  ← zkrácené labely RX / TX
+ *   │              bez kritických chyb │
+ *   │          TX  103 MB · 363k pkt   │
+ *   │              bez kritických chyb │
+ *   └──────────────────────────────────┘
  * ================================================================= */
 @media (max-width:720px){
 	.netports-tablewrap{overflow-x:visible}
 	.netports-table{min-width:0;width:100%;border-collapse:separate;border-spacing:0}
 
-	/* Skrýt řádek s hlavičkami sloupců - popisky budou v každé buňce */
 	.netports-table tr.table-titles{display:none}
 
-	/* Každý řádek = karta */
+	/* ----- Karta ----- */
 	.netports-table tr.tr{
 		display:block;
-		margin:0 0 12px 0;
-		padding:10px 12px;
+		margin:0 0 10px 0;
+		padding:12px 14px;
 		border:1px solid var(--border-color-medium);
 		border-radius:var(--radius-md,10px);
 		background:var(--background-color-high);
-		box-shadow:0 1px 3px rgba(0,0,0,.04);
+		box-shadow:0 1px 3px rgba(0,0,0,.05);
 	}
-	/* Vynulovat zebra pruhy LuCI - karty mají vlastní pozadí */
 	.netports-table tr.cbi-rowstyle-1,
 	.netports-table tr.cbi-rowstyle-2{background:var(--background-color-high)}
 
-	/* Buňka = blok pod sebou s popiskem nahoře */
 	.netports-table .td{
 		display:block;
 		width:100% !important;
 		min-width:0 !important;
-		padding:8px 0;
+		padding:0;
 		border:none;
-		border-bottom:1px dashed var(--border-color-medium);
 		text-align:left;
 	}
-	.netports-table tr.tr .td:last-child{border-bottom:none;padding-bottom:2px}
-	.netports-table tr.tr .td:first-child{padding-top:2px}
 
-	/* Popisek sloupce (text-transform UPPERCASE, malé tučné) */
-	.netports-table .td[data-label]::before{
-		content:attr(data-label);
-		display:block;
+	/* ===== HEADER sekce: name + status (bez popisků) ===== */
+	.netports-cell-name::before,
+	.netports-cell-status::before{display:none !important}
+
+	/* Jméno: tučné, MAC pod tím menším */
+	.netports-cell-name{
+		font-size:115%;
+		padding-bottom:4px;
+		line-height:1.4em;
+	}
+	.netports-cell-name strong{font-size:107%}
+
+	/* Status: ikona vlevo, vše napravo */
+	.netports-cell-status{
+		padding-bottom:10px;
+		margin-bottom:10px;
+		border-bottom:1px solid var(--border-color-medium);
+	}
+	.netports-cell-status .netports-linkstatus-icon-container{
+		width:36px;flex-shrink:0;
+	}
+	.netports-cell-status .netports-linkstatus-icon-container-v{
+		float:left;margin-right:10px;margin-bottom:0;
+	}
+	.netports-cell-status .netports-linkstatus-text{white-space:normal}
+
+	/* ===== NETWORK sekce: Rozhraní/Bridge/FW jako key:value ===== */
+	.netports-cell-netif,
+	.netports-cell-bridge,
+	.netports-cell-fw{
+		padding:3px 0;
+		line-height:1.45em;
+	}
+	.netports-cell-netif::before,
+	.netports-cell-bridge::before,
+	.netports-cell-fw::before{
+		content:attr(data-label) ":";
+		display:inline-block;
+		min-width:7em;
 		color:var(--text-color-low);
-		font-size:78%;
 		font-weight:600;
-		text-transform:uppercase;
-		letter-spacing:.4px;
-		margin-bottom:4px;
+		font-size:90%;
+		vertical-align:top;
+	}
+	.netports-cell-netif > *:not(.netports-th-sub),
+	.netports-cell-bridge > *:not(.netports-th-sub),
+	.netports-cell-fw > *:not(.netports-th-sub){
+		display:inline;
+	}
+	/* FW zóny použiváj inline-block ifaceboxy → vrátím inline-block jen jim */
+	.netports-cell-fw .ifacebox{display:inline-block;vertical-align:top;margin-left:0}
+
+	/* Oddělovač před TRAFFIC */
+	.netports-cell-rx{
+		margin-top:10px;
+		padding-top:10px;
+		border-top:1px solid var(--border-color-medium);
 	}
 
-	/* Stav linky - ikona + text napravo, vejde se do mobilní šířky */
-	.netports-linkstatus-icon-container{width:36px;flex-shrink:0}
-	.netports-linkstatus-icon-container-v{float:left;margin-right:10px;margin-bottom:6px}
-	.netports-linkstatus-text{white-space:normal}
+	/* ===== TRAFFIC sekce: RX / TX kompaktně ===== */
+	.netports-cell-rx,
+	.netports-cell-tx{
+		padding:3px 0;
+		line-height:1.5em;
+	}
+	.netports-cell-rx::before{
+		content:"RX";
+		display:inline-block;
+		min-width:2.4em;
+		font-weight:700;
+		font-size:80%;
+		color:#fff;
+		background:var(--brand-primary-medium,#005a6f);
+		padding:1px 6px;
+		border-radius:var(--radius-sm,6px);
+		margin-right:8px;
+		text-align:center;
+		vertical-align:middle;
+	}
+	.netports-cell-tx::before{
+		content:"TX";
+		display:inline-block;
+		min-width:2.4em;
+		font-weight:700;
+		font-size:80%;
+		color:#fff;
+		background:#a06b30;
+		padding:1px 6px;
+		border-radius:var(--radius-sm,6px);
+		margin-right:8px;
+		text-align:center;
+		vertical-align:middle;
+	}
+	/* Hodnota provozu inline (B + paketů) */
+	.netports-cell-rx,
+	.netports-cell-tx{font-size:95%}
+
+	/* Errblock zachovat jako vlastní řádek pod hlavními daty */
+	.netports-cell-rx .netports-errblock,
+	.netports-cell-rx .netports-errblock-ok,
+	.netports-cell-tx .netports-errblock,
+	.netports-cell-tx .netports-errblock-ok{
+		display:block;
+		margin-left:3.4em; /* odsadit pod data, vyrovnat se ikonou RX/TX */
+		margin-top:3px;
+		padding-top:3px;
+		border-top:1px dashed var(--border-color-medium);
+	}
 
 	/* Hlavička widgetu - title + tlačítka pod sebe */
 	.netports-title{flex-flow:column-reverse;align-items:flex-start;gap:8px}
 	.netports-buttons{flex-flow:row;margin:0}
 	.netports-resetinfo{margin:0}
 
-	/* Placeholder řádek (Žádná data) bez ::before */
+	/* Placeholder */
 	.netports-table tr.tr.placeholder .td::before{display:none}
 	.netports-table tr.tr.placeholder{padding:14px;text-align:center}
 
-	/* Modal přizpůsobení mobilní šířce */
+	/* ===== Modal přizpůsobení ===== */
 	.netports-modal{padding:12px;margin:-6px}
 	.netports-modal-summary{grid-template-columns:1fr;gap:10px}
 	.netports-statcard{padding:10px 12px}
 	.netports-statcard .value{font-size:15px}
 	.netports-statcard .value.mono{font-size:14px}
 
-	/* Tabulka chyb v modalu - schovat sloupec Δ na úzkých displejích
-	   (3. sloupec = Δ refresh) — Celkem + Význam stačí pro diagnostiku. */
 	.netports-modal-errtable th:nth-child(3),
 	.netports-modal-errtable td:nth-child(3){display:none}
 	.netports-modal-errtable th,
@@ -108,7 +205,10 @@
 
 /* Velmi úzké (telefon na výšku, < 380px) - další zhuštění */
 @media (max-width:380px){
-	.netports-table tr.tr{padding:8px 10px}
+	.netports-table tr.tr{padding:10px 12px}
+	.netports-cell-netif::before,
+	.netports-cell-bridge::before,
+	.netports-cell-fw::before{min-width:5.5em;font-size:85%}
 	.netports-statcard{padding:8px 10px}
 	.netports-statcard .label{font-size:10px}
 	.netports-modal h4{font-size:14px}
