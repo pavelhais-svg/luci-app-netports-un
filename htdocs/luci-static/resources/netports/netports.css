@@ -14,7 +14,7 @@
  *   --radius-sm  (6px), --radius-md (10px), --radius-lg (16px)
  */
 
-/* ----- Base table layout (zachová LuCI vzhled) -------------------- */
+/* ----- Base table layout (desktop / tablet) ---------------------- */
 .netports-table{width:100%;min-width:1100px}
 .netports-table .td,.netports-table .th{line-height:1.35em;padding:6px 10px;vertical-align:top}
 .netports-table .th{font-weight:600}
@@ -23,7 +23,96 @@
 
 @media (max-width:1280px){.netports-table{min-width:980px}}
 @media (max-width:900px){.netports-table{min-width:760px}}
-@media (max-width:600px){.netports-table{min-width:560px}}
+
+/* =================================================================
+ * Mobile (≤720px) — stacked karty, žádný horizontální scroll
+ * Každý port = jedna karta. Buňky stacknuté pod sebou s popiskem
+ * sloupce (z `data-label` JS attributu) nahoře.
+ * ================================================================= */
+@media (max-width:720px){
+	.netports-tablewrap{overflow-x:visible}
+	.netports-table{min-width:0;width:100%;border-collapse:separate;border-spacing:0}
+
+	/* Skrýt řádek s hlavičkami sloupců - popisky budou v každé buňce */
+	.netports-table tr.table-titles{display:none}
+
+	/* Každý řádek = karta */
+	.netports-table tr.tr{
+		display:block;
+		margin:0 0 12px 0;
+		padding:10px 12px;
+		border:1px solid var(--border-color-medium);
+		border-radius:var(--radius-md,10px);
+		background:var(--background-color-high);
+		box-shadow:0 1px 3px rgba(0,0,0,.04);
+	}
+	/* Vynulovat zebra pruhy LuCI - karty mají vlastní pozadí */
+	.netports-table tr.cbi-rowstyle-1,
+	.netports-table tr.cbi-rowstyle-2{background:var(--background-color-high)}
+
+	/* Buňka = blok pod sebou s popiskem nahoře */
+	.netports-table .td{
+		display:block;
+		width:100% !important;
+		min-width:0 !important;
+		padding:8px 0;
+		border:none;
+		border-bottom:1px dashed var(--border-color-medium);
+		text-align:left;
+	}
+	.netports-table tr.tr .td:last-child{border-bottom:none;padding-bottom:2px}
+	.netports-table tr.tr .td:first-child{padding-top:2px}
+
+	/* Popisek sloupce (text-transform UPPERCASE, malé tučné) */
+	.netports-table .td[data-label]::before{
+		content:attr(data-label);
+		display:block;
+		color:var(--text-color-low);
+		font-size:78%;
+		font-weight:600;
+		text-transform:uppercase;
+		letter-spacing:.4px;
+		margin-bottom:4px;
+	}
+
+	/* Stav linky - ikona + text napravo, vejde se do mobilní šířky */
+	.netports-linkstatus-icon-container{width:36px;flex-shrink:0}
+	.netports-linkstatus-icon-container-v{float:left;margin-right:10px;margin-bottom:6px}
+	.netports-linkstatus-text{white-space:normal}
+
+	/* Hlavička widgetu - title + tlačítka pod sebe */
+	.netports-title{flex-flow:column-reverse;align-items:flex-start;gap:8px}
+	.netports-buttons{flex-flow:row;margin:0}
+	.netports-resetinfo{margin:0}
+
+	/* Placeholder řádek (Žádná data) bez ::before */
+	.netports-table tr.tr.placeholder .td::before{display:none}
+	.netports-table tr.tr.placeholder{padding:14px;text-align:center}
+
+	/* Modal přizpůsobení mobilní šířce */
+	.netports-modal{padding:12px;margin:-6px}
+	.netports-modal-summary{grid-template-columns:1fr;gap:10px}
+	.netports-statcard{padding:10px 12px}
+	.netports-statcard .value{font-size:15px}
+	.netports-statcard .value.mono{font-size:14px}
+
+	/* Tabulka chyb v modalu - schovat sloupec Δ na úzkých displejích
+	   (3. sloupec = Δ refresh) — Celkem + Význam stačí pro diagnostiku. */
+	.netports-modal-errtable th:nth-child(3),
+	.netports-modal-errtable td:nth-child(3){display:none}
+	.netports-modal-errtable th,
+	.netports-modal-errtable td{padding:6px 8px;font-size:91%}
+	.netports-modal-errtable td.desc{font-size:90%;line-height:1.4em}
+	.netports-modal-timeline{font-size:11px;padding:8px 10px}
+}
+
+/* Velmi úzké (telefon na výšku, < 380px) - další zhuštění */
+@media (max-width:380px){
+	.netports-table tr.tr{padding:8px 10px}
+	.netports-statcard{padding:8px 10px}
+	.netports-statcard .label{font-size:10px}
+	.netports-modal h4{font-size:14px}
+}
 
 /* ----- Linkstatus icon + text (původní layout) -------------------- */
 .netports-linkstatus-icon-container{width:42px;position:relative}

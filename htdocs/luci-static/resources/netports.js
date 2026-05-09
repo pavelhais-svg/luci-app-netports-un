@@ -885,9 +885,14 @@ var NetPorts = L.Class.extend({
 					var tcells = [];
 					dataTitles.forEach(function(t) {
 						if (t.vModeDisable) return;
-						tcells.push(E('td',
-							{ 'class': 'td ' + config.tblCellClasses },
-							t.fmtFunc(port)));
+						/* data-label = popisek sloupce, použito pro mobile
+						   stacked layout (CSS @media ≤720px) */
+						var dataLabel = t.title +
+							(t.subtitle ? ' ' + t.subtitle : '');
+						tcells.push(E('td', {
+							'class': 'td ' + config.tblCellClasses,
+							'data-label': dataLabel
+						}, t.fmtFunc(port)));
 					});
 					var trow = E('tr', { 'class': 'tr' }, tcells);
 					trow.classList.add('cbi-rowstyle-%d'.format((n++ % 2) ? 2 : 1));
