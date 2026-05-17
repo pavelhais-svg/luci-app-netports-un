@@ -54,7 +54,7 @@ return L.Class.extend({
 		});
 	},
 
-	title: _('Stav síťových portů'),
+	title: _('Network Interfaces Ports Status'),
 
 	load: function() {
 		return Promise.all([

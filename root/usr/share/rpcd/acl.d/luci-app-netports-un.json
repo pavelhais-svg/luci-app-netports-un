@@ -3,6 +3,8 @@
 		"description": "Grant access to network ports status information",
 		"read": {
 			"ubus": {
+				"session": [ "access", "login" ],
+				"service": [ "list" ],
 				"netports": [ "getPortsInfo", "getPortEvents" ]
 			},
 			"uci": [ "luci_netports" ]

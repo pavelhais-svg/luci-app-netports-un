@@ -1,0 +1,404 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: Pavel Hais <pavelhais@u-n.cz>\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+msgid "%1024.2mB"
+msgstr "%1024.2mB"
+
+msgid "%d seconds ago"
+msgstr "před %d sekundami"
+
+msgid "%d minutes ago"
+msgstr "před %d minutami"
+
+msgid "%d hours ago"
+msgstr "před %d hodinami"
+
+msgid "%d days ago"
+msgstr "před %d dny"
+
+msgid "Auto detect"
+msgstr "Automatická detekce"
+
+msgid "Bad frame checksum. Typically bad cable, EMI interference, faulty connector or NIC."
+msgstr "Špatný kontrolní součet rámce. Typicky špatný kabel, EMI rušení, vadný konektor nebo síťová karta."
+
+msgid "Bridge member"
+msgstr "Člen mostu"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Cisco CDP / HP FDP / ExtremeNetworks EDP / Nortel SONMP"
+msgstr "Cisco CDP / HP FDP / ExtremeNetworks EDP / Nortel SONMP"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Collecting data..."
+msgstr "Sbírám data..."
+
+msgid "Connected"
+msgstr "Připojeno"
+
+msgid "Continue?"
+msgstr "Pokračovat?"
+
+msgid "Counter"
+msgstr "Čítač"
+
+msgid "Counters have been reset. Table refreshed."
+msgstr "Čítače byly resetovány. Tabulka obnovena."
+
+msgid "Critical error counters (RX)"
+msgstr "Kritické chybové čítače (RX)"
+
+msgid "Critical error counters (TX)"
+msgstr "Kritické chybové čítače (TX)"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Details / history ›"
+msgstr "Detail / historie ›"
+
+msgid "Disabled"
+msgstr "Vypnuto"
+
+msgid "Disconnected"
+msgstr "Odpojeno"
+
+msgid "Display additional information in horizontal view mode by default"
+msgstr "Ve vodorovném režimu zobrazit ve výchozím stavu i další informace"
+
+msgid "DOWN"
+msgstr "DOLŮ"
+
+msgid "drops/5 min"
+msgstr "výpadků/5 min"
+
+msgid "Event history"
+msgstr "Historie událostí"
+
+msgid "Failed to load events"
+msgstr "Nepodařilo se načíst události"
+
+msgid "Firewall zones"
+msgstr "Zóny firewallu"
+
+msgid "Flaps"
+msgstr "Flapy"
+
+msgid "Frame misalignment. Usually bad cable, faulty NIC or duplex mismatch."
+msgstr "Chybné zarovnání rámce. Obvykle špatný kabel, vadná síťová karta nebo nesoulad duplexu."
+
+msgid "Full egress queue at shaper / QoS (htb, tbf, cake)"
+msgstr "Plná odchozí fronta u shaperu / QoS (htb, tbf, cake)"
+
+msgid "full-duplex"
+msgstr "plný duplex"
+
+msgid "GPRS"
+msgstr "GPRS"
+
+msgid "Grant access to network ports status information"
+msgstr "Udělit přístup k informacím o stavu síťových portů"
+
+msgid "half-duplex"
+msgstr "poloviční duplex"
+
+msgid "Hidden"
+msgstr "Skrytý"
+
+msgid "Informational counters"
+msgstr "Informativní čítače"
+
+msgid "(incoming packets)"
+msgstr "(příchozí pakety)"
+
+msgid "Instability threshold (flap count per 5 minutes)"
+msgstr "Práh nestability (počet flapů za 5 minut)"
+
+msgid "Interface"
+msgstr "Rozhraní"
+
+msgid "interface"
+msgstr "rozhraní"
+
+msgid "Interface in admin down during transmission"
+msgstr "Rozhraní v admin down během přenosu"
+
+msgid "Interfaces Status"
+msgstr "Stav rozhraní"
+
+msgid "Intercircuit fixed link"
+msgstr "Mezikruhovité pevné spojení"
+
+msgid "IPv6 ND/RA without active IPv6 listener"
+msgstr "IPv6 ND/RA bez aktivního IPv6 posluchače"
+
+msgid "Last event"
+msgstr "Poslední událost"
+
+msgid "last"
+msgstr "poslední"
+
+msgid "24h"
+msgstr "24h"
+
+msgid "Line collisions. Normal on half-duplex. On full-duplex indicates duplex mismatch and a serious problem."
+msgstr "Kolize na lince. Normální při half-duplexu. Při full-duplexu indikuje nesoulad duplexu a závažný problém."
+
+msgid "link stable"
+msgstr "linka stabilní"
+
+msgid "LLDP (0x88CC) from managed switch – every 30 s"
+msgstr "LLDP (0x88CC) ze spravovaného přepínače – každých 30 s"
+
+msgid "Loading…"
+msgstr "Načítám…"
+
+msgid "Loss of carrier during transmission. Bad cable, poor connection or sudden link drops."
+msgstr "Ztráta nosiče při přenosu. Špatný kabel, špatné spojení nebo náhlé výpadky linky."
+
+msgid "Link status"
+msgstr "Stav linky"
+
+msgid "MAC-address"
+msgstr "MAC-adresa"
+
+msgid "Mbit/s"
+msgstr "Mbit/s"
+
+msgid "MikroTik MNDP (UDP/5678 broadcast)"
+msgstr "MikroTik MNDP (UDP/5678 broadcast)"
+
+msgid "Most common causes:"
+msgstr "Nejčastější příčiny:"
+
+msgid "Name and MAC-address"
+msgstr "Název a MAC-adresa"
+
+msgid "Network Interfaces Ports Status"
+msgstr "Stav síťových portů"
+
+msgid "NIC FIFO buffer overflow. CPU or bus cannot keep up with incoming traffic."
+msgstr "Přetečení FIFO bufferu síťové karty. CPU nebo sběrnice nestíhá příchozí provoz."
+
+msgid "NIC TX FIFO buffer overflow."
+msgstr "Přetečení TX FIFO bufferu síťové karty."
+
+msgid "Nick name"
+msgstr "Přezdívka"
+
+msgid "no critical errors"
+msgstr "žádné kritické chyby"
+
+msgid "No data to display"
+msgstr "Žádná data k zobrazení"
+
+msgid "No events yet (history is cleared on restart)."
+msgstr "Zatím žádné události (historie se vymaže při restartu)."
+
+msgid "no incidents recorded"
+msgstr "žádné incidenty nezaznamenány"
+
+msgid "no recent incidents"
+msgstr "žádné nedávné incidenty"
+
+msgid "No route – missing route to destination"
+msgstr "Žádná trasa – chybí trasa k cíli"
+
+msgid "none"
+msgstr "žádný"
+
+msgid "none yet"
+msgstr "zatím žádné"
+
+msgid "occasional drops"
+msgstr "občasné výpadky"
+
+msgid "(outgoing packets)"
+msgstr "(odchozí pakety)"
+
+msgid "Outgoing packet was not sent and kernel dropped it before NIC."
+msgstr "Odchozí paket nebyl odeslán a jádro ho zahodilo před síťovou kartou."
+
+msgid "Packet received physically but Linux kernel dropped it before passing to the network stack (no registered protocol handler)."
+msgstr "Paket byl fyzicky přijat, ale linuxové jádro ho zahodilo před předáním síťovému zásobníku (žádný registrovaný obslužný program protokolu)."
+
+msgid "Packets with VLAN tag the interface cannot decode"
+msgstr "Pakety s VLAN tagem, který rozhraní neumí dekódovat"
+
+msgid "pkts."
+msgstr "pkt."
+
+msgid "Port diagnostics"
+msgstr "Diagnostika portu"
+
+msgid "Port is active"
+msgstr "Port je aktivní"
+
+msgid "Port is administratively disabled"
+msgstr "Port je administrativně vypnutý"
+
+msgid "Port is disconnected – cable unplugged or remote side down"
+msgstr "Port je odpojen – kabel vypojen nebo vzdálená strana nefunguje"
+
+msgid "Port is unstable (flapping)"
+msgstr "Port je nestabilní (flapuje)"
+
+msgid "Port List"
+msgstr "Seznam portů"
+
+msgid "port&#160;%d"
+msgstr "port&#160;%d"
+
+msgid "Port type"
+msgstr "Typ portu"
+
+msgid "PPP"
+msgstr "PPP"
+
+msgid "recently disconnected"
+msgstr "nedávno odpojen"
+
+msgid "Reset"
+msgstr "Resetovat"
+
+msgid "Reset counters and history"
+msgstr "Resetovat čítače a historii"
+
+msgid "Reset error counters and flap history"
+msgstr "Resetovat chybové čítače a historii flapů"
+
+msgid "Reset failed"
+msgstr "Reset selhal"
+
+msgid "RJ45"
+msgstr "RJ45"
+
+msgid "RX"
+msgstr "RX"
+
+msgid "RX ring buffer overflow in driver. Same cause as rx_fifo, different layer."
+msgstr "Přetečení RX ring bufferu v ovladači. Stejná příčina jako rx_fifo, jiná vrstva."
+
+msgid "Sent multicast without registered listeners"
+msgstr "Odeslán multicast bez registrovaných posluchačů"
+
+msgid "SFP"
+msgstr "SFP"
+
+msgid "Show button for manual switching between horizontal/vertical view modes"
+msgstr "Zobrazit tlačítko pro ruční přepínání mezi vodorovným/svislým zobrazením"
+
+msgid "Show error counters for RX/TX columns"
+msgstr "Zobrazit chybové čítače pro sloupce RX/TX"
+
+msgid "Slow growth (1–5/min) on a port connected to a managed switch is NORMAL. Consider action only when growth > 50/min or sudden spike."
+msgstr "Pomalý růst (1–5/min) na portu připojeném ke spravovanému přepínači je NORMÁLNÍ. Zvažte akci pouze při růstu > 50/min nebo náhlém skoku."
+
+msgid "Stability"
+msgstr "Stabilita"
+
+msgid "STP/RSTP BPDU from switch"
+msgstr "STP/RSTP BPDU z přepínače"
+
+msgid "Sum of all RX errors (CRC, frame, fifo, length, …). If growing, there is a HW/cabling problem."
+msgstr "Součet všech RX chyb (CRC, rámec, fifo, délka, …). Pokud roste, je problém s HW nebo kabeláží."
+
+msgid "Sum of all TX errors. If growing, there is a problem on the link or NIC."
+msgstr "Součet všech TX chyb. Pokud roste, je problém na lince nebo síťové kartě."
+
+msgid "These counters typically grow without issues – e.g. LLDP/CDP/IPv6 ND. Do not use them to assess port health."
+msgstr "Tyto čítače typicky rostou bez problémů – např. LLDP/CDP/IPv6 ND. Nepoužívejte je k hodnocení zdraví portu."
+
+msgid "This action will clear the flap history and save the current error counter values as a new baseline. Values will restart from zero."
+msgstr "Tato akce vymaže historii flapů a uloží aktuální hodnoty chybových čítačů jako nový základ. Hodnoty se restartují od nuly."
+
+msgid "Toggle additional information"
+msgstr "Přepnout další informace"
+
+msgid "Toggle view mode"
+msgstr "Přepnout režim zobrazení"
+
+msgid "Too many ports for horizontal display mode"
+msgstr "Příliš mnoho portů pro vodorovný režim zobrazení"
+
+msgid "Total"
+msgstr "Celkem"
+
+msgid "Traffic shaping limit or rate-limit on NIC"
+msgstr "Limit tvarování provozu nebo rate-limit na síťové kartě"
+
+msgid "Transmission aborted – usually after reaching repeated collision limit. Indicates congested or half-duplex segment."
+msgstr "Přenos přerušen – obvykle po dosažení limitu opakovaných kolizí. Indikuje přetížený nebo half-duplex segment."
+
+msgid "Tunnel"
+msgstr "Tunel"
+
+msgid "TX"
+msgstr "TX"
+
+msgid "Under normal operation this value should stay 0 or grow very slowly. A sudden spike indicates congestion or misconfigured QoS."
+msgstr "Za normálního provozu by tato hodnota měla zůstat 0 nebo růst velmi pomalu. Náhlý skok indikuje přetížení nebo špatně nakonfigurovaný QoS."
+
+msgid "UNSTABLE"
+msgstr "NESTABILNÍ"
+
+msgid "UP"
+msgstr "NAHORU"
+
+msgid "USB 2G modem"
+msgstr "USB 2G modem"
+
+msgid "USB 3G modem"
+msgstr "USB 3G modem"
+
+msgid "USB 4G modem"
+msgstr "USB 4G modem"
+
+msgid "USB modem"
+msgstr "USB modem"
+
+msgid "USB RNDIS"
+msgstr "USB RNDIS"
+
+msgid "USB Wireless"
+msgstr "USB bezdrátové"
+
+msgid "Use horizontal view mode by default"
+msgstr "Použít vodorovné zobrazení jako výchozí"
+
+msgid "VPN"
+msgstr "VPN"
+
+msgid "When this value is exceeded the port is marked as UNSTABLE."
+msgstr "Při překročení této hodnoty je port označen jako NESTABILNÍ."
+
+msgid "Wireless"
+msgstr "Bezdrátové"
+
+msgid "active"
+msgstr "aktivní"
+
+msgid "connection"
+msgstr "spojení"
+
+msgid "disabled"
+msgstr "vypnuto"
+
+msgid "disconnected"
+msgstr "odpojeno"
+
+msgid "Δ refresh"
+msgstr "Δ obnovení"
