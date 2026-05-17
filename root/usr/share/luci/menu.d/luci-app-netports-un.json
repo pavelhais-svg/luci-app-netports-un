@@ -7,8 +7,7 @@
       "path": "netports"
     },
     "depends": {
-      "acl": [ "luci-app-netports-un" ],
-      "uci": { "luci_netports": true }
+      "acl": [ "luci-app-netports-un" ]
     }
   }
 }

@@ -12,7 +12,7 @@ for d in /www/luci-static/resources/view/status/include /usr/share/luci-static/r
     fi
 done
 
-# 2) Pokud už je něco nastavené (mimo lo), nesahat
+# 2) If something is already configured (except lo), leave it alone
 i=0
 while :; do
     ifname="$(uci -q get ${CFG_PKG}.@port[$i].ifname 2>/dev/null || true)"
@@ -31,7 +31,7 @@ while :; do
     i=$((i+1))
 done
 
-# 3) Helper: existuje už port s ifname?
+# 3) Helper: does a port with this ifname already exist?
 port_exists() {
     uci -q show "${CFG_PKG}" 2>/dev/null | grep -q "ifname='${1}'"
 }
@@ -48,7 +48,7 @@ add_port() {
     [ -n "$ptype" ] && uci set ${CFG_PKG}.${sid}.type="$ptype"
 }
 
-# 4) Global + lo disabled (jen pokud chybí)
+# 4) Global + lo disabled (only if missing)
 [ -f "$CFG_FILE" ] || touch "$CFG_FILE"
 
 if ! uci -q get ${CFG_PKG}.global >/dev/null 2>&1; then
@@ -64,7 +64,7 @@ if ! port_exists "lo"; then
     uci set ${CFG_PKG}.${sid}.disable="1"
 fi
 
-# 5) Pořadí: WAN -> LAN -> WiFi
+# 5) Order: WAN -> LAN -> WiFi
 # WAN (jen pokud existuje netdev "wan")
 WAN_ADDED=0
 if [ -d /sys/class/net/wan ]; then
@@ -72,7 +72,7 @@ if [ -d /sys/class/net/wan ]; then
     WAN_ADDED=1
 fi
 
-# LAN1..LAN8 (přidá jen existující)
+# LAN1..LAN8 (only adds existing ones)
 LAN_COUNT=0
 n=1
 while [ "$n" -le 8 ]; do
@@ -83,23 +83,23 @@ while [ "$n" -le 8 ]; do
     n=$((n+1))
 done
 
-# Fallback pro jednoportové ethernet HW:
-# pokud není "wan" a nejsou žádné "lan*", ale existuje eth0, přidej eth0
+# Fallback for single-port ethernet HW:
+# if no "wan" and no "lan*" exist, but eth0 exists, add eth0
 if [ "$WAN_ADDED" -eq 0 ] && [ "$LAN_COUNT" -eq 0 ] && [ -d /sys/class/net/eth0 ]; then
     add_port "eth0" "auto"
 fi
 
-# Wi-Fi 2G/5G/6G (jen pokud existují)
+# Wi-Fi 2G/5G/6G (only if they exist)
 add_port "2G" "wifi"
 add_port "5G" "wifi"
 add_port "6G" "wifi"
 
 uci commit ${CFG_PKG}
 
-# 6) Cache vyčistit ano, ale NERESTARTOVAT uhttpd/rpcd (LuCI install by spadlo na XHR)
+# 6) Clear cache yes, but DO NOT restart uhttpd/rpcd (LuCI install would fail on XHR)
 rm -f /tmp/luci-indexcache 2>/dev/null || true
 rm -rf /tmp/luci-modulecache/ 2>/dev/null || true
 
-# 7) Jednorázový skript odstranit
+# 7) Remove one-time script
 rm -f /etc/uci-defaults/99_luci-app-netports-un 2>/dev/null || true
 exit 0

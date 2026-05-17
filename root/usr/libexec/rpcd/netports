@@ -311,7 +311,7 @@ local methods = {
 				p.flaps = calc_flap_stats(events, p.ifname, now)
 			end
 
-			-- Provide reset timestamp (so UI can show "Resetováno: <čas>")
+			-- Provide reset timestamp (so UI can show "Reset: <time>")
 			local meta = read_json_file(netports_baseline_file .. ".meta")
 			ports.reset_ts = tonumber(meta.ts) or 0
 			ports.now      = now

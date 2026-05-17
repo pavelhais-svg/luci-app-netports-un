@@ -1,48 +1,48 @@
 /* luci-app-netports-un — UN branding (cascade.css) compatible
  *
- * Vše navázané na CSS proměnné UN bootstrap themu:
- *   --brand-primary-medium   hlavní teal #005a6f      (info, odkazy)
- *   --brand-primary-light    světlejší teal           (hover/highlight)
- *   --brand-accent           limetková #b3d236        (OK / success)
+ * All values tied to CSS variables of the UN bootstrap theme:
+ *   --brand-primary-medium   primary teal #005a6f      (info, links)
+ *   --brand-primary-light    lighter teal             (hover/highlight)
+ *   --brand-accent           lime #b3d236             (OK / success)
  *   --success-color-medium   = brand-accent
- *   --success-color-low      tmavší limetka #91a92b  (text na světlém pozadí)
- *   --error-color-medium     #bf4e4c                  (chyba, problém)
- *   --error-color-low        #b14946                  (tmavší pro text)
- *   --text-color-high/low    primární / muted text
+ *   --success-color-low      darker lime #91a92b      (text on light background)
+ *   --error-color-medium     #bf4e4c                  (error, problem)
+ *   --error-color-low        #b14946                  (darker for text)
+ *   --text-color-high/low    primary / muted text
  *   --background-color-high/medium/low
  *   --border-color-medium
  *   --radius-sm  (6px), --radius-md (10px), --radius-lg (16px)
  */
 
 /* ----- Base table layout (desktop / tablet) ---------------------- */
-/* Tabulka se sama vejde do content area LuCI - žádný hardcoded min-width.
+/* Table fits into LuCI content area - no hardcoded min-width.
    Sloupce roztahuje table-layout: auto podle obsahu (vModeMinWidth na <th>
-   slouží jako spodní hint, ne hard constraint). */
+   serves as a lower hint, not a hard constraint). */
 .netports-table{width:100%;table-layout:auto}
 .netports-table .td,.netports-table .th{line-height:1.35em;padding:6px 10px;vertical-align:top}
 .netports-table .th{font-weight:600}
 
-/* Pojistný horizontal scroll - jen pokud by se tabulka opravdu nevešla.
-   Při normálním provozu (≥ 720 px viewport, < 720 přepneme na karty)
-   by NIKDY neměl být aktivní. */
+/* Failsafe horizontal scroll - only if the table truly does not fit.
+   Under normal operation (≥ 720 px viewport, < 720 switches to cards)
+   should NEVER be active. */
 .netports-tablewrap{overflow-x:auto;width:100%}
 
 /* =================================================================
- * Mobile (≤720px) — kompaktní karta podobná stávajícímu LuCI Port
- * status: každý port = jedna karta s 3 logickými sekcemi pod sebou.
+ * Mobile (≤720px) — compact card similar to existing LuCI Port
+ * status: each port = one card with 3 logical sections stacked.
  *
  *   ┌──────────────────────────────────┐
- *   │ HEADER: ikona + jméno + speed    │  ← bez data-label, samovysvětlující
- *   │   ● stabilní · Detail / hist ›   │
+ *   │ HEADER: icon + name + speed    │  ← no data-label, self-explanatory
+ *   │   ● stable · Detail / hist ›   │
  *   ├──────────────────────────────────┤
- *   │ NETWORK: Rozhraní:  wan          │  ← key:value definition list
+ *   │ NETWORK: Interface:  wan          │  ← key:value definition list
  *   │          Bridge:    –            │
- *   │          FW zóny:   wan          │
+ *   │          FW zones:  wan          │
  *   ├──────────────────────────────────┤
- *   │ TRAFFIC: RX  769 MB · 787k pkt   │  ← zkrácené labely RX / TX
- *   │              bez kritických chyb │
+ *   │ TRAFFIC: RX  769 MB · 787k pkt   │  ← shortened labels RX / TX
+ *   │              no critical errors        │
  *   │          TX  103 MB · 363k pkt   │
- *   │              bez kritických chyb │
+ *   │              no critical errors        │
  *   └──────────────────────────────────┘
  * ================================================================= */
 @media (max-width:720px){
@@ -73,11 +73,11 @@
 		text-align:left;
 	}
 
-	/* ===== HEADER sekce: name + status (bez popisků) ===== */
+	/* ===== HEADER section: name + status (no labels) ===== */
 	.netports-cell-name::before,
 	.netports-cell-status::before{display:none !important}
 
-	/* Jméno: tučné, MAC pod tím menším */
+	/* Name: bold, MAC below in smaller font */
 	.netports-cell-name{
 		font-size:115%;
 		padding-bottom:4px;
@@ -85,7 +85,7 @@
 	}
 	.netports-cell-name strong{font-size:107%}
 
-	/* Status: ikona vlevo, vše napravo */
+	/* Status: icon left, everything to the right */
 	.netports-cell-status{
 		padding-bottom:10px;
 		margin-bottom:10px;
@@ -99,7 +99,7 @@
 	}
 	.netports-cell-status .netports-linkstatus-text{white-space:normal}
 
-	/* ===== NETWORK sekce: Rozhraní/Bridge/FW jako key:value ===== */
+	/* ===== NETWORK section: Interface/Bridge/FW as key:value ===== */
 	.netports-cell-netif,
 	.netports-cell-bridge,
 	.netports-cell-fw{
@@ -122,10 +122,10 @@
 	.netports-cell-fw > *:not(.netports-th-sub){
 		display:inline;
 	}
-	/* FW zóny použiváj inline-block ifaceboxy → vrátím inline-block jen jim */
+	/* FW zones use inline-block ifaceboxes → restore inline-block only for them */
 	.netports-cell-fw .ifacebox{display:inline-block;vertical-align:top;margin-left:0}
 
-	/* Oddělovač před TRAFFIC */
+	/* Separator before TRAFFIC */
 	.netports-cell-rx{
 		margin-top:10px;
 		padding-top:10px;
@@ -166,11 +166,11 @@
 		text-align:center;
 		vertical-align:middle;
 	}
-	/* Hodnota provozu inline (B + paketů) */
+	/* Traffic value inline (B + packets) */
 	.netports-cell-rx,
 	.netports-cell-tx{font-size:95%}
 
-	/* Errblock zachovat jako vlastní řádek pod hlavními daty */
+	/* Errblock keep as own line below main data */
 	.netports-cell-rx .netports-errblock,
 	.netports-cell-rx .netports-errblock-ok,
 	.netports-cell-tx .netports-errblock,
@@ -182,7 +182,7 @@
 		border-top:1px dashed var(--border-color-medium);
 	}
 
-	/* Hlavička widgetu - title + tlačítka pod sebe */
+	/* Widget header - title + buttons stacked */
 	.netports-title{flex-flow:column-reverse;align-items:flex-start;gap:8px}
 	.netports-buttons{flex-flow:row;margin:0}
 	.netports-resetinfo{margin:0}
@@ -191,7 +191,7 @@
 	.netports-table tr.tr.placeholder .td::before{display:none}
 	.netports-table tr.tr.placeholder{padding:14px;text-align:center}
 
-	/* ===== Modal přizpůsobení ===== */
+	/* ===== Modal customisation ===== */
 	.netports-modal{padding:12px;margin:-6px}
 	.netports-modal-summary{grid-template-columns:1fr;gap:10px}
 	.netports-statcard{padding:10px 12px}
@@ -206,7 +206,7 @@
 	.netports-modal-timeline{font-size:11px;padding:8px 10px}
 }
 
-/* Velmi úzké (telefon na výšku, < 380px) - další zhuštění */
+/* Very narrow (phone portrait, < 380px) - further compression */
 @media (max-width:380px){
 	.netports-table tr.tr{padding:10px 12px}
 	.netports-cell-netif::before,
@@ -217,7 +217,7 @@
 	.netports-modal h4{font-size:14px}
 }
 
-/* ----- Linkstatus icon + text (původní layout) -------------------- */
+/* ----- Linkstatus icon + text (original layout) -------------------- */
 .netports-linkstatus-icon-container{width:42px;position:relative}
 .netports-linkstatus-icon{display:inline-block;max-width:100%;width:100%;height:auto}
 .netports-linkstatus-icon-container-v{float:left;margin-right:8px}
@@ -248,16 +248,16 @@
 
 .netports-resetinfo{color:var(--text-color-low,#888);font-size:85%;margin-right:8px;align-self:center}
 
-/* ----- Sub-title pod hlavičkou (např. "(příchozí pakety)") -------- */
+/* ----- Sub-title below header (e.g. "(incoming packets)") -------- */
 .netports-th-sub{display:block;color:var(--text-color-low,#888);font-size:85%;font-weight:normal;margin-top:1px}
 
-/* ----- State texts (Připojeno) ----------------------------------- */
+/* ----- State texts (Connected) ----------------------------------- */
 .netports-state-up{color:var(--text-color-high,#333)}
 .netports-state-since{display:block;color:var(--text-color-low,#888);font-size:90%;margin-top:1px}
 
-/* ----- Stavový badge (rychlost / Odpojeno / Vypnuto) -------------
- * Sjednocený vizuál: barevný box, LuCI radius, čitelný kontrast.
- * Použití: speed (1000/100/10) i state (bad/off) přes stejnou třídu. */
+/* ----- State badge (speed / Disconnected / Disabled) -------------
+ * Unified visual: color box, LuCI radius, readable contrast.
+ * Usage: speed (1000/100/10) and state (bad/off) via same class. */
 .netports-speed-row{display:block}
 .netports-speed,
 .netports-statebox{
@@ -300,7 +300,7 @@
 
 @keyframes netports-pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-/* Pulzující rámeček ikony při flapování (jediný outline na ikoně) */
+/* Pulsing icon border during flapping (only outline on icon) */
 .netports-linkstatus-icon-flapping{outline:2px solid var(--error-color-medium,#bf4e4c);
 	outline-offset:1px;border-radius:var(--radius-sm,6px);animation:netports-pulse 1.2s infinite}
 
@@ -318,8 +318,8 @@
 
 /* =================================================================
  * Detail modal — UN branding dashboard
- * Používá výhradně CSS proměnné UN bootstrap themu, takže ladí
- * s celou aplikací včetně tmavého režimu.
+ * Uses exclusively CSS variables of the UN bootstrap theme, so it fits
+ * with the whole application including dark mode.
  * ================================================================= */
 .netports-modal{
 	background: var(--background-color-medium);
@@ -330,7 +330,7 @@
 	max-width: 920px;
 }
 
-/* ---------- Sekce h4 (s barevným proužkem před textem) ---------- */
+/* ---------- Section h4 (with color stripe before text) ---------- */
 .netports-modal h4{
 	margin: 18px 0 10px;
 	padding: 0 0 0 12px;
@@ -353,7 +353,7 @@
 	color: var(--brand-primary-medium, #005a6f);
 }
 
-/* Note - krátký vysvětlující odstavec (nad info tabulkou) */
+/* Note - short explanatory paragraph (above info table) */
 .netports-modal-note{
 	background: rgba(0, 90, 111, 0.07);
 	border: 1px solid rgba(0, 90, 111, 0.18);
@@ -403,7 +403,7 @@
 .netports-statcard .value.mono{font-family: monospace; font-size: 16px}
 .netports-statcard-wide{grid-column: 1 / -1}
 
-/* Akcenty karet - levý proužek + jemný gradient + barva hodnoty */
+/* Card accents - left stripe + subtle gradient + value color */
 .netports-statcard-ok{
 	border-left: 4px solid var(--brand-accent, #b3d236);
 	background: linear-gradient(180deg,
@@ -494,7 +494,7 @@
 .netports-modal-errtable tbody tr:hover{background: rgba(0, 90, 111, 0.04)}
 .netports-modal-errtable tbody tr.has-errors:hover{background: rgba(191, 78, 76, 0.10)}
 
-/* ---------- Timeline událostí ---------- */
+/* ---------- Event timeline ---------- */
 .netports-modal-timeline{
 	background: var(--background-color-high);
 	border: 1px solid var(--border-color-medium);

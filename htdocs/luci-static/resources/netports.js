@@ -81,57 +81,57 @@ function fmtDateTime(ts) {
 }
 
 /* RX/TX field grouping
-   - critical: skutečné HW/SW problémy, vždy v hlavní tabulce
-   - info:     management traffic / běžné jevy, jen v detail modalu      */
+   - critical: real HW/SW problems, always shown in main table
+   - info:     management traffic / normal events, only in detail modal  */
 const rxFieldsCritical = [
 	{ key: 'rx_errors',       label: 'rx_errors',
-	  desc: _('Souhrn všech RX chyb (CRC, frame, fifo, length, …). Pokud roste, je problém na HW/kabeláži.') },
+	  desc: _('Sum of all RX errors (CRC, frame, fifo, length, …). If growing, there is a HW/cabling problem.') },
 	{ key: 'rx_crc_errors',   label: 'rx_crc',
-	  desc: _('Vadný kontrolní součet rámce. Typicky špatný kabel, rušení (EMI), vadný konektor nebo NIC.') },
+	  desc: _('Bad frame checksum. Typically bad cable, EMI interference, faulty connector or NIC.') },
 	{ key: 'rx_frame_errors', label: 'rx_frame',
-	  desc: _('Rámec nemá správné zarovnání. Obvykle špatný kabel, vadná NIC nebo duplex-mismatch.') },
+	  desc: _('Frame misalignment. Usually bad cable, faulty NIC or duplex mismatch.') },
 	{ key: 'rx_fifo_errors',  label: 'rx_fifo',
-	  desc: _('Přeplnění FIFO bufferu NIC. CPU nebo sběrnice nestíhá zpracovávat příchozí provoz.') },
+	  desc: _('NIC FIFO buffer overflow. CPU or bus cannot keep up with incoming traffic.') },
 	{ key: 'rx_over_errors',  label: 'rx_over',
-	  desc: _('Přetečení RX kruhového bufferu v ovladači. Stejná příčina jako rx_fifo, jiná vrstva.') }
+	  desc: _('RX ring buffer overflow in driver. Same cause as rx_fifo, different layer.') }
 ];
 
 const rxFieldsInfo = [
 	{ key: 'rx_dropped',      label: 'rx_drop',
-	  desc: _('Paket přijat fyzicky, ale Linux kernel ho zahodil před předáním do síťového stacku (chybí registrovaný handler protokolu).')
-	      + '\n' + _('Nejčastější příčiny:')
-	      + '\n• ' + _('LLDP (0x88CC) od managed switche – každých 30 s')
+	  desc: _('Packet received physically but Linux kernel dropped it before passing to the network stack (no registered protocol handler).')
+	      + '\n' + _('Most common causes:')
+	      + '\n• ' + _('LLDP (0x88CC) from managed switch – every 30 s')
 	      + '\n• ' + _('Cisco CDP / HP FDP / ExtremeNetworks EDP / Nortel SONMP')
 	      + '\n• ' + _('MikroTik MNDP (UDP/5678 broadcast)')
-	      + '\n• ' + _('STP/RSTP BPDU od přepínače')
-	      + '\n• ' + _('IPv6 ND/RA bez aktivního IPv6 listeneru')
-	      + '\n• ' + _('Pakety s VLAN tagem, který rozhraní neumí dekódovat')
-	      + '\n' + _('Pomalý růst (1–5/min) na portu připojeném k managed switchi je NORMÁLNÍ. Akce zvážit teprve při růstu > 50/min nebo náhlém skoku.') }
+	      + '\n• ' + _('STP/RSTP BPDU from switch')
+	      + '\n• ' + _('IPv6 ND/RA without active IPv6 listener')
+	      + '\n• ' + _('Packets with VLAN tag the interface cannot decode')
+	      + '\n' + _('Slow growth (1–5/min) on a port connected to a managed switch is NORMAL. Consider action only when growth > 50/min or sudden spike.') }
 ];
 
 const txFieldsCritical = [
 	{ key: 'tx_errors',         label: 'tx_errors',
-	  desc: _('Souhrn všech TX chyb. Pokud roste, je problém na lince nebo NIC.') },
+	  desc: _('Sum of all TX errors. If growing, there is a problem on the link or NIC.') },
 	{ key: 'tx_carrier_errors', label: 'tx_carrier',
-	  desc: _('Ztráta linky během vysílání. Vadný kabel, špatný spoj nebo náhlé výpadky linky.') },
+	  desc: _('Loss of carrier during transmission. Bad cable, poor connection or sudden link drops.') },
 	{ key: 'tx_aborted_errors', label: 'tx_aborted',
-	  desc: _('Vysílání zrušeno – obvykle po dosažení limitu opakovaných kolizí. Indikuje přetížený nebo half-duplex segment.') },
+	  desc: _('Transmission aborted – usually after reaching repeated collision limit. Indicates congested or half-duplex segment.') },
 	{ key: 'tx_fifo_errors',    label: 'tx_fifo',
-	  desc: _('Přeplnění TX FIFO bufferu NIC.') },
+	  desc: _('NIC TX FIFO buffer overflow.') },
 	{ key: 'collisions',        label: 'collisions',
-	  desc: _('Kolize na lince. Na half-duplex je to normální. Na full-duplex znamená duplex-mismatch a vážný problém.') }
+	  desc: _('Line collisions. Normal on half-duplex. On full-duplex indicates duplex mismatch and a serious problem.') }
 ];
 
 const txFieldsInfo = [
 	{ key: 'tx_dropped',        label: 'tx_drop',
-	  desc: _('Odchozí paket nebyl odeslán a kernel ho zahodil ještě před NIC.')
-	      + '\n' + _('Nejčastější příčiny:')
-	      + '\n• ' + _('Plná odchozí fronta při shaper / QoS (htb, tbf, cake)')
-	      + '\n• ' + _('Žádná cesta – chybí route k cíli')
-	      + '\n• ' + _('Rozhraní v admin down během vysílání')
-	      + '\n• ' + _('Limit traffic shaping nebo rate-limit na NIC')
-	      + '\n• ' + _('Odeslaný multicast bez registrovaných posluchačů')
-	      + '\n' + _('Při normálním provozu by hodnota měla zůstat 0 nebo růst velmi pomalu. Náhlý skok znamená přetížení nebo chybnou QoS konfiguraci.') }
+	  desc: _('Outgoing packet was not sent and kernel dropped it before NIC.')
+	      + '\n' + _('Most common causes:')
+	      + '\n• ' + _('Full egress queue at shaper / QoS (htb, tbf, cake)')
+	      + '\n• ' + _('No route – missing route to destination')
+	      + '\n• ' + _('Interface in admin down during transmission')
+	      + '\n• ' + _('Traffic shaping limit or rate-limit on NIC')
+	      + '\n• ' + _('Sent multicast without registered listeners')
+	      + '\n' + _('Under normal operation this value should stay 0 or grow very slowly. A sudden spike indicates congestion or misconfigured QoS.') }
 ];
 
 var NetPorts = L.Class.extend({
@@ -187,12 +187,12 @@ var NetPorts = L.Class.extend({
 			return 'netports-speed netports-speed-other';
 		};
 
-		/* Format relative age "před X" in Czech */
+		/* Format relative age as human-readable string */
 		var fmtAge = function(secs) {
-			if (secs < 60)    return _('před') + ' ' + secs + ' ' + _('s');
-			if (secs < 3600)  return _('před') + ' ' + Math.floor(secs/60) + ' ' + _('min');
-			if (secs < 86400) return _('před') + ' ' + Math.floor(secs/3600) + ' ' + _('h');
-			return _('před') + ' ' + Math.floor(secs/86400) + ' ' + _('d');
+			if (secs < 60)    return _('%d seconds ago').format(secs);
+			if (secs < 3600)  return _('%d minutes ago').format(Math.floor(secs/60));
+			if (secs < 86400) return _('%d hours ago').format(Math.floor(secs/3600));
+			return _('%d days ago').format(Math.floor(secs/86400));
 		};
 
 		/* Decide context-aware stability label.
@@ -200,32 +200,31 @@ var NetPorts = L.Class.extend({
 		var getStabilityState = function(portData) {
 			var f = portData.flaps || { count_5m: 0, count_1h: 0, count_24h: 0 };
 			var phyup   = parseInt(portData.carrier) === 1;
-			var adminup = portData.adminstate === 'up';
+			var adminup = (portData.adminstate === 'up') ? 1 : 0;
 
-			/* Aktivně flapuje */
+				/* Actively flapping */
 			if (f.count_5m >= config.flapThreshold5m)
-				return { text: _('NESTABILNÍ') + ' (' + f.count_5m + '/5 min)', cls: 'bad' };
+				return { text: _('UNSTABLE') + ' (' + f.count_5m + '/5 min)', cls: 'bad' };
 
-			/* Admin down – stav je už v hlavním badge "Vypnuto" */
+			/* Admin down */
 			if (!adminup)
-				return { text: _('bez výpadků v záznamu'), cls: 'off' };
+				return { text: _('no incidents recorded'), cls: 'off' };
 
-			/* Admin up, ale bez signálu */
+			/* Admin up, no carrier */
 			if (!phyup) {
 				if (f.count_1h > 0)
-					return { text: _('nedávno odpojeno') + ' (' + f.count_1h + '/h)', cls: 'warn' };
-				/* Nestop duplikovat „bez signálu", to už je v hlavním badge "Odpojeno". */
-				return { text: _('bez nedávných incidentů'), cls: 'off' };
+					return { text: _('recently disconnected') + ' (' + f.count_1h + '/h)', cls: 'warn' };
+				return { text: _('no recent incidents'), cls: 'off' };
 			}
 
-			/* Aktivní spojení s občasnými výpadky */
+			/* Active with occasional drops */
 			if (f.count_5m > 0)
-				return { text: f.count_5m + ' ' + _('výpadek/5 min'), cls: 'warn' };
+				return { text: f.count_5m + ' ' + _('drops/5 min'), cls: 'warn' };
 			if (f.count_1h > 0)
-				return { text: _('občasné výpadky') + ' (' + f.count_1h + '/h)', cls: 'warn' };
+				return { text: _('occasional drops') + ' (' + f.count_1h + '/h)', cls: 'warn' };
 
-			/* Plně aktivní bez incidentů */
-			return { text: _('spojení stabilní'), cls: 'ok' };
+			/* Fully active, no incidents */
+			return { text: _('link stable'), cls: 'ok' };
 		};
 
 		/* Flap badge to display under the link-status icon */
@@ -241,17 +240,16 @@ var NetPorts = L.Class.extend({
 				E('span', { class: txtCls }, st.text)
 			]);
 
-			/* doplnit krátký detail historie, pokud je co říct */
-			if (f.count_24h > 0 && st.cls !== 'bad') {
+				if (f.count_24h > 0 && st.cls !== 'bad') {
 				wrap.appendChild(E('span', { class: 'netports-flap-detail' },
-					_('za 24 h') + ': ' + f.count_24h
-					+ ' · ' + _('poslední') + ': '
+					_('24h') + ': ' + f.count_24h
+					+ ' · ' + _('last') + ': '
 					+ (f.last_ev || '?') + ' ' + fmtTime(f.last_ts)));
 			}
 
 			/* link to details modal */
 			var link = E('span', { class: 'netports-flap-link' });
-			var a = E('a', { 'data-port': portData.ifname }, _('Detail / historie ›'));
+			var a = E('a', { 'data-port': portData.ifname }, _('Details / history ›'));
 			a.addEventListener('click', function(ev) {
 				ev.preventDefault();
 				ev.stopPropagation();
@@ -286,10 +284,10 @@ var NetPorts = L.Class.extend({
 				class: iconClass,
 				src: L.resource('netports/icons/' + icon),
 				title: isFlapping(portData)
-					? _('Port je nestabilní (flapuje)') + ': ' + portData.flaps.count_5m + ' / 5 min'
-					: (!adminup ? _('Port je administrativně vypnutý')
-					: (!phyup  ? _('Port je odpojený – kabel není zapojený nebo druhá strana down')
-					: _('Port je aktivní')))
+					? _('Port is unstable (flapping)') + ': ' + portData.flaps.count_5m + ' / 5 min'
+					: (!adminup ? _('Port is administratively disabled')
+					: (!phyup  ? _('Port is disconnected – cable unplugged or remote side down')
+					: _('Port is active')))
 			}));
 
 			var statusText = E('div', { class: 'netports-linkstatus-text' });
@@ -303,21 +301,21 @@ var NetPorts = L.Class.extend({
 							speed + ' Mbit/s'));
 					} else {
 						statusText.appendChild(E('span',
-							{ class: 'netports-state-up' },
-							_('Připojeno')));
+						{ class: 'netports-state-up' },
+						_('Connected')));
 					}
 					if (portData.duplex === 'full')
 						statusText.appendChild(E('span',
 							{ class: 'netports-duplex' },
-							_('plný duplex')));
+							_('full-duplex')));
 					else if (portData.duplex === 'half')
 						statusText.appendChild(E('span',
 							{ class: 'netports-duplex' },
-							_('poloviční duplex')));
+							_('half-duplex')));
 				} else {
 					statusText.appendChild(E('span',
 						{ class: 'netports-statebox netports-statebox-bad' },
-						_('Odpojeno')));
+						_('Disconnected')));
 					var f0 = portData.flaps || {};
 					if (f0.last_ts > 0 && f0.last_ev === 'down') {
 						var age = Math.max(0, Math.floor(Date.now()/1000) - f0.last_ts);
@@ -329,7 +327,7 @@ var NetPorts = L.Class.extend({
 			} else {
 				statusText.appendChild(E('span',
 					{ class: 'netports-statebox netports-statebox-off' },
-					_('Vypnuto')));
+					_('Disabled')));
 			}
 
 			statusText.appendChild(renderFlapBadge(portData));
@@ -359,6 +357,7 @@ var NetPorts = L.Class.extend({
 					v += ' (<a href="/cgi-bin/luci/admin/network/network">'
 						+ portData.ntm_bridge.netname.toUpperCase() + '</a>)';
 				v += ',<br />' + _('port&#160;%d').format(portData.bridge.port);
+
 				return v;
 			}
 			return '&ndash;';
@@ -379,9 +378,9 @@ var NetPorts = L.Class.extend({
 					+ firewall.getColorForName(n.fwzone) + ';">';
 				if (out_ifname) ifname = n.netname.toUpperCase() + ': ';
 				z += n.fwzone
-					? '<strong><a href="/cgi-bin/luci/admin/network/firewall/zones">'
-						+ ifname + n.fwzone + '</a></strong>'
-					: '<em>' + _('žádná') + '</em>';
+				? '<strong><a href="/cgi-bin/luci/admin/network/firewall/zones">'
+					+ ifname + n.fwzone + '</a></strong>'
+				: '<em>' + _('none') + '</em>';
 				z += '</div></div>';
 			});
 			return z;
@@ -417,7 +416,7 @@ var NetPorts = L.Class.extend({
 			});
 
 			if (!anyNonZero) {
-				return E('span', { class: 'netports-errblock-ok' }, _('bez kritických chyb'));
+				return E('span', { class: 'netports-errblock-ok' }, _('no critical errors'));
 			}
 			return E('span', { class: 'netports-errblock' }, rows);
 		};
@@ -427,7 +426,7 @@ var NetPorts = L.Class.extend({
 			if (portData.stats.tx_bytes) {
 				elements.push(_('%1024.2mB').format(portData.stats.tx_bytes));
 				elements.push(E('br', {}));
-				elements.push('(%d %s)'.format(portData.stats.tx_packets, _('paketů')));
+				elements.push('(%d %s)'.format(portData.stats.tx_packets, _('pkts.')));
 			} else {
 				elements.push(document.createTextNode('—'));
 			}
@@ -441,7 +440,7 @@ var NetPorts = L.Class.extend({
 			if (portData.stats.rx_bytes) {
 				elements.push(_('%1024.2mB').format(portData.stats.rx_bytes));
 				elements.push(E('br', {}));
-				elements.push('(%d %s)'.format(portData.stats.rx_packets, _('paketů')));
+				elements.push('(%d %s)'.format(portData.stats.rx_packets, _('pkts.')));
 			} else {
 				elements.push(document.createTextNode('—'));
 			}
@@ -459,31 +458,31 @@ var NetPorts = L.Class.extend({
 
 		/* ---------- columns ---------- */
 		var dataTitles = [
-			{ title: _('Název a MAC'),       vModeMinWidth: '110px',
+			{ title: _('Name and MAC-address'), vModeMinWidth: '110px',
 			  cellClass: 'netports-cell-name',
-			  fmtFunc: fmtNameAndMAC,         hModeDisable: true },
-			{ title: _('Stav linky'),        vModeMinWidth: '170px',
+			  fmtFunc: fmtNameAndMAC,           hModeDisable: true },
+			{ title: _('Link status'),          vModeMinWidth: '170px',
 			  cellClass: 'netports-cell-status',
 			  fmtFunc: fmtStatus },
-			{ title: _('Rozhraní'),
+			{ title: _('Interface'),
 			  cellClass: 'netports-cell-netif',
 			  fmtFunc: fmtNetIf,    hModeExtra: true },
-			{ title: _('Bridge'),
+			{ title: _('Bridge member'),
 			  cellClass: 'netports-cell-bridge',
 			  fmtFunc: fmtBridgeIf, hModeExtra: true },
-			{ title: _('Firewall zóny'),
+			{ title: _('Firewall zones'),
 			  cellClass: 'netports-cell-fw',
 			  fmtFunc: fmtFwZones },
-			{ title: _('Příjem RX'),  subtitle: _('(příchozí pakety)'),
+			{ title: _('RX'),  subtitle: _('(incoming packets)'),
 			  cellClass: 'netports-cell-rx',
-			  vModeMinWidth: '160px',         fmtFunc: fmtRx,       hModeExtra: true },
-			{ title: _('Odeslání TX'), subtitle: _('(odchozí pakety)'),
+			  vModeMinWidth: '160px',           fmtFunc: fmtRx,       hModeExtra: true },
+			{ title: _('TX'),  subtitle: _('(outgoing packets)'),
 			  cellClass: 'netports-cell-tx',
-			  vModeMinWidth: '160px',         fmtFunc: fmtTx,       hModeExtra: true },
-			{ title: _('MAC adresa'),
+			  vModeMinWidth: '160px',           fmtFunc: fmtTx,       hModeExtra: true },
+			{ title: _('MAC-address'),
 			  cellClass: 'netports-cell-mac',
 			  fmtFunc: fmtMAC,
-			  vModeDisable: true,             hModeExtra: true }
+			  vModeDisable: true,               hModeExtra: true }
 		];
 
 		/* Build a fresh header cell content (string or node-with-subtitle) */
@@ -532,46 +531,42 @@ var NetPorts = L.Class.extend({
 		};
 
 		var doReset = function() {
-			ui.showModal(_('Reset čítačů a historie'), [
-				E('p', {}, _('Tato akce smaže historii flapů a uloží aktuální stav chybových čítačů jako nový základ. Hodnoty se začnou počítat od nuly.')),
-				E('p', {}, _('Pokračovat?')),
+			ui.showModal(_('Reset counters and history'), [
+				E('p', {}, _('This action will clear the flap history and save the current error counter values as a new baseline. Values will restart from zero.')),
+				E('p', {}, _('Continue?')),
 				E('div', { class: 'right' }, [
 					E('button', {
 						class: 'cbi-button',
 						click: ui.hideModal
-					}, _('Zrušit')),
+					}, _('Cancel')),
 					' ',
 					E('button', {
 						class: 'cbi-button cbi-button-negative',
 						click: function() {
 							callNetPortsResetStats('all').then(function(r) {
-								/* Drop client-side delta cache so first refresh after
-								   reset doesn't show negative deltas. */
 								lastErrorsByIf = {};
 								ui.hideModal();
-								/* Force immediate refresh of the table so user sees
-								   zeroed counters without waiting for the auto-poll tick. */
 								return callNetPortsGetInfoLib().then(function(d) {
 									updateData(d);
 									ui.addNotification(null,
-										E('p', {}, _('Čítače byly resetovány. Tabulka byla obnovena.')),
+										E('p', {}, _('Counters have been reset. Table refreshed.')),
 										'info');
 								});
 							}).catch(function(err) {
 								ui.hideModal();
 								ui.addNotification(null,
-									E('p', {}, _('Reset selhal') + ': ' + String(err)),
+									E('p', {}, _('Reset failed') + ': ' + String(err)),
 									'danger');
 							});
 						}
-					}, _('Resetovat'))
+					}, _('Reset'))
 				])
 			]);
 		};
 
 		var createButtons = function() {
 			btnExpand = E('button',
-				{ class: 'cbi-button', title: _('Zobrazit / skrýt další informace') },
+				{ class: 'cbi-button', title: _('Toggle additional information') },
 				svgExpand);
 			btnExpand.addEventListener('click', function() {
 				setHModeExpanded(!config.hModeExpanded);
@@ -579,14 +574,14 @@ var NetPorts = L.Class.extend({
 			buttons.push(btnExpand);
 
 			btnReset = E('button',
-				{ class: 'cbi-button', title: _('Resetovat čítače chyb a historii flapů') },
+				{ class: 'cbi-button', title: _('Reset error counters and flap history') },
 				svgReset);
 			btnReset.addEventListener('click', doReset);
 			buttons.push(btnReset);
 
 			if (config.modeSwitchButton) {
 				btnModeSwitch = E('button',
-					{ class: 'cbi-button', title: _('Přepnout zobrazení svisle/vodorovně') },
+					{ class: 'cbi-button', title: _('Toggle view mode') },
 					svgModeSwitch);
 				btnModeSwitch.addEventListener('click', function() {
 					setMode(config.mode == NetPortsMode.V ? NetPortsMode.H : NetPortsMode.V);
@@ -605,7 +600,7 @@ var NetPorts = L.Class.extend({
 		var updateResetInfo = function(data) {
 			if (!resetInfoElement) return;
 			if (data && data.reset_ts && data.reset_ts > 0) {
-				resetInfoElement.innerHTML = _('Resetováno') + ': ' + fmtDateTime(data.reset_ts);
+				resetInfoElement.innerHTML = _('Reset') + ': ' + fmtDateTime(data.reset_ts);
 				resetInfoElement.style.display = '';
 			} else {
 				resetInfoElement.style.display = 'none';
@@ -616,7 +611,7 @@ var NetPorts = L.Class.extend({
 		var renderEventTimeline = function(events) {
 			if (!events || events.length === 0) {
 				return E('div', { class: 'netports-modal-empty' },
-					_('Zatím žádné události (po restartu se historie maže).'));
+					_('No events yet (history is cleared on restart).'));
 			}
 			var box = E('div', { class: 'netports-modal-timeline' });
 			var rev = events.slice().reverse();
@@ -625,7 +620,7 @@ var NetPorts = L.Class.extend({
 				line.appendChild(document.createTextNode(fmtDateTime(e.ts) + '  '));
 				line.appendChild(E('span',
 					{ class: e.ev === 'up' ? 'ev-up' : 'ev-down' },
-					(e.ev === 'up' ? '▲ ' + _('AKTIVNÍ') + ' ' : '▼ ' + _('VYPNUTÝ') + ' ')));
+					(e.ev === 'up' ? '▲ ' + _('UP') + ' ' : '▼ ' + _('DOWN') + ' ')));
 				if (e.speed)
 					line.appendChild(document.createTextNode(' ' + e.speed + ' Mb/s '));
 				if (e.duplex)
@@ -641,10 +636,10 @@ var NetPorts = L.Class.extend({
 			var prev = lastErrorsByIf[portData.ifname] || {};
 
 			var head = E('tr', {}, [
-				E('th', { style: 'width:9em'   }, _('Čítač')),
-				E('th', { style: 'width:6em'   }, _('Celkem')),
+				E('th', { style: 'width:9em'   }, _('Counter')),
+				E('th', { style: 'width:6em'   }, _('Total')),
 				E('th', { style: 'width:5em'   }, _('Δ refresh')),
-				E('th', {}, _('Význam'))
+				E('th', {}, _('Description'))
 			]);
 			var rows = [head];
 			fields.forEach(function(f) {
@@ -668,86 +663,86 @@ var NetPorts = L.Class.extend({
 			var adminup = portData.adminstate === 'up';
 			var speed   = parseInt(portData.speed) || 0;
 
-			/* Stav linky - smysluplný popisek + barva */
+			/* Link state - descriptive label + color */
 			var linkState, linkCls;
-			if (!adminup)      { linkState = _('vypnuto');      linkCls = 'off'; }
-			else if (!phyup)   { linkState = _('odpojeno');     linkCls = 'bad'; }
+			if (!adminup)      { linkState = _('disabled');      linkCls = 'off'; }
+			else if (!phyup)   { linkState = _('disconnected');     linkCls = 'bad'; }
 			else if (speed > 0){ linkState = speed + ' Mbit/s'; linkCls = 'ok'; }
-			else               { linkState = _('aktivní');      linkCls = 'ok'; }
+			else               { linkState = _('active');      linkCls = 'ok'; }
 
-			/* Stabilita - kontextově (stejný text jako v hlavní tabulce) */
+			/* Stability - contextual (same text as in main table) */
 			var stab = getStabilityState(portData);
 
-			/* Flap statistika - kompaktně na jednom řádku */
+			/* Flap statistics - compact single line */
 			var flapTriplet = (f.count_5m || 0) + ' / '
 				+ (f.count_1h || 0) + ' / '
 				+ (f.count_24h || 0);
 
 			var lastEvent = f.last_ts
-				? ((f.last_ev === 'up' ? '▲ ' + _('AKTIVNÍ') : '▼ ' + _('VYPNUTÝ'))
+				? ((f.last_ev === 'up' ? '▲ ' + _('UP') + ' ' : '▼ ' + _('DOWN'))
 					+ ' · ' + fmtDateTime(f.last_ts))
-				: _('zatím žádná');
+				: _('none yet');
 
 			var summary = E('div', { class: 'netports-modal-summary' }, [
 				E('div', { class: 'netports-statcard' }, [
-					E('span', { class: 'label' }, _('Rozhraní')),
+					E('span', { class: 'label' }, _('Interface')),
 					E('span', { class: 'value mono' }, portData.ifname)
 				]),
 				E('div', { class: 'netports-statcard netports-statcard-' + linkCls }, [
-					E('span', { class: 'label' }, _('Stav linky')),
+					E('span', { class: 'label' }, _('Link status')),
 					E('span', { class: 'value' }, linkState)
 				]),
 				E('div', { class: 'netports-statcard netports-statcard-' + stab.cls }, [
-					E('span', { class: 'label' }, _('Stabilita')),
+					E('span', { class: 'label' }, _('Stability')),
 					E('span', { class: 'value' }, stab.text)
 				]),
 				E('div', { class: 'netports-statcard' }, [
 					E('span', { class: 'label' },
-						_('Flapy') + ' (5 m / 1 h / 24 h)'),
+						_('Flaps') + ' (5 m / 1 h / 24 h)'),
 					E('span', { class: 'value mono' }, flapTriplet)
 				]),
 				E('div', { class: 'netports-statcard netports-statcard-wide' }, [
-					E('span', { class: 'label' }, _('Poslední událost')),
+					E('span', { class: 'label' }, _('Last event')),
 					E('span', { class: 'value' }, lastEvent)
 				])
 			]);
 
-			var timelineSlot = E('div', {}, _('Načítání…'));
+			var timelineSlot = E('div', {}, _('Loading…'));
 			var content = E('div', { class: 'netports-modal' }, [
 				summary,
-				E('h4', {}, _('Historie událostí')),
+				E('h4', {}, _('Event history')),
 				timelineSlot,
 
 				E('h4', { class: 'netports-modal-h-critical' },
-					_('Kritické čítače chyb (RX)')),
+					_('Critical error counters (RX)')),
 				renderErrorSection(portData, rxFieldsCritical, 'critical'),
 
 				E('h4', { class: 'netports-modal-h-critical' },
-					_('Kritické čítače chyb (TX)')),
+					_('Critical error counters (TX)')),
 				renderErrorSection(portData, txFieldsCritical, 'critical'),
 
 				E('h4', { class: 'netports-modal-h-info' },
-					_('Informativní čítače')),
+					_('Informational counters')),
 				E('p', { class: 'netports-modal-note' },
-					_('Tyto čítače obvykle rostou i bez problému – typicky LLDP/CDP/IPv6 ND. Pro hodnocení stavu portu je nepoužívejte.')),
+					_('These counters typically grow without issues – e.g. LLDP/CDP/IPv6 ND. Do not use them to assess port health.')),
 				renderErrorSection(portData, rxFieldsInfo.concat(txFieldsInfo), 'info'),
 
 				E('div', { style: 'text-align:right;margin-top:12px' },
 					E('button', {
 						class: 'cbi-button',
 						click: ui.hideModal
-					}, _('Zavřít'))
+					}, _('Close'))
 				)
 			]);
 
-			ui.showModal(_('Diagnostika portu') + ' — ' + portData.ifname, content);
+			ui.showModal(_('Port diagnostics') + ' — ' + portData.ifname, content);
 
 			callNetPortsGetEvents(portData.ifname, 200).then(function(res) {
 				var ev = (res && res.events) ? res.events : [];
 				var tl = renderEventTimeline(ev);
 				timelineSlot.parentNode.replaceChild(tl, timelineSlot);
 			}).catch(function(err) {
-				timelineSlot.innerHTML = '<em>' + _('Nepodařilo se načíst události') + ': ' + String(err) + '</em>';
+				timelineSlot.innerHTML = '<em>' + _('Failed to load events') + ': ' + String(err) + '</em>';
 			});
 		};
 
@@ -771,7 +766,7 @@ var NetPorts = L.Class.extend({
 					E('th', { class: 'th top center' }, '...')),
 				E('tr', { class: 'tr placeholder' },
 					E('td', { class: 'td' },
-						E('em', { class: 'spinning' }, _('Načítám data…'))))
+						E('em', { class: 'spinning' }, _('Collecting data...'))))
 			]);
 			var tableWrapper = E('div', { class: 'table-wrapper netports-tablewrap' }, table);
 			targetElement.appendChild(title);
@@ -815,14 +810,14 @@ var NetPorts = L.Class.extend({
 						if (btnModeSwitch) {
 							btnModeSwitch.setAttribute('disabled', true);
 							btnModeSwitch.setAttribute('title',
-								_('Příliš mnoho portů pro vodorovné zobrazení'));
+								_('Too many ports for horizontal display mode'));
 						}
 						updateButtons();
 					}
 				} else if (btnModeSwitch) {
 					btnModeSwitch.removeAttribute('disabled');
 					btnModeSwitch.setAttribute('title',
-						_('Přepnout zobrazení svisle/vodorovně'));
+						_('Toggle view mode'));
 				}
 			}
 
@@ -897,9 +892,9 @@ var NetPorts = L.Class.extend({
 					var tcells = [];
 					dataTitles.forEach(function(t) {
 						if (t.vModeDisable) return;
-						/* data-label = popisek sloupce, použito pro mobile
-						   stacked layout (CSS @media ≤720px). cellClass dává
-						   sémantickou třídu pro responsive layout. */
+						/* data-label = column heading, used for mobile
+					   stacked layout (CSS @media ≤720px). cellClass gives
+					   a semantic class for responsive layout. */
 						var dataLabel = t.title +
 							(t.subtitle ? ' ' + t.subtitle : '');
 						tcells.push(E('td', {
@@ -915,7 +910,7 @@ var NetPorts = L.Class.extend({
 				if (data.length === 0) {
 					tableElement.appendChild(E('tr', { 'class': 'tr placeholder' },
 						E('td', { 'class': 'td top center' },
-							_('Žádná data k zobrazení'))));
+							_('No data to display'))));
 				}
 				return;
 			}
@@ -967,7 +962,7 @@ var NetPorts = L.Class.extend({
 			if (tableElement.firstElementChild === tableElement.lastElementChild) {
 				tableElement.appendChild(E('tr', { 'class': 'tr placeholder' },
 					E('td', { 'class': 'td top center' },
-						_('Žádná data k zobrazení'))));
+						_('No data to display'))));
 			}
 		};
 

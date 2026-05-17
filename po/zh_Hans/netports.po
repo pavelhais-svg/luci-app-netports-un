@@ -15,7 +15,7 @@ msgstr ""
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:226
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:239
 msgid "%1024.2mB"
-msgstr ""
+msgstr "%1024.2mB"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:55
 msgid "Auto detect"
@@ -54,7 +54,7 @@ msgstr "防火墙区域"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:66
 msgid "GPRS"
-msgstr ""
+msgstr "GPRS"
 
 #: applications/luci-app-netports-un/root/usr/share/rpcd/acl.d/luci-app-netports-un.json:3
 msgid "Grant access to network ports status information"
@@ -86,7 +86,7 @@ msgstr "MAC-地址"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:122
 msgid "Mbit/s"
-msgstr ""
+msgstr "Mbit/s"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:249
 msgid "Name and MAC-address"
@@ -107,7 +107,7 @@ msgstr "无可用数据"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:69
 msgid "PPP"
-msgstr ""
+msgstr "PPP"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:39
 msgid "Port List"
@@ -119,15 +119,15 @@ msgstr "接口类型"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:56
 msgid "RJ45"
-msgstr ""
+msgstr "RJ45"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:254
 msgid "RX"
-msgstr ""
+msgstr "RX 接收"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:57
 msgid "SFP"
-msgstr ""
+msgstr "SFP"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:35
 msgid "Show button for manual switching between horizontal/vertical view modes"
@@ -135,7 +135,7 @@ msgstr "显示手动切换显示模式按钮"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:255
 msgid "TX"
-msgstr ""
+msgstr "TX 发送"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:310
 msgid "Toggle additional information"
@@ -168,7 +168,7 @@ msgstr "USB 4G 调制解调器"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:61
 msgid "USB RNDIS"
-msgstr ""
+msgstr "USB RNDIS"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:60
 msgid "USB Wireless"
@@ -184,7 +184,7 @@ msgstr "默认使用水平显示模式"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:67
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:59
 msgid "Wireless"
@@ -209,11 +209,11 @@ msgstr "连接"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:127
 msgid "full-duplex"
-msgstr ""
+msgstr "全双工"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:129
 msgid "half-duplex"
-msgstr ""
+msgstr "半双工"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/view/netports.js:44
 msgid "interface"
@@ -221,13 +221,256 @@ msgstr "接口"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:214
 msgid "none"
-msgstr ""
+msgstr "无"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:228
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:241
 msgid "pkts."
-msgstr ""
+msgstr "包"
 
 #: applications/luci-app-netports-un/htdocs/luci-static/resources/netports.js:177
 msgid "port&#160;%d"
 msgstr "端口&#160;%d"
+
+msgid "%d seconds ago"
+msgstr "%d 秒前"
+
+msgid "%d minutes ago"
+msgstr "%d 分钟前"
+
+msgid "%d hours ago"
+msgstr "%d 小时前"
+
+msgid "%d days ago"
+msgstr "%d 天前"
+
+msgid "UNSTABLE"
+msgstr "不稳定"
+
+msgid "no incidents recorded"
+msgstr "无故障记录"
+
+msgid "recently disconnected"
+msgstr "最近断开"
+
+msgid "no recent incidents"
+msgstr "近期无故障"
+
+msgid "drops/5 min"
+msgstr "次断线/5分钟"
+
+msgid "occasional drops"
+msgstr "偶发断线"
+
+msgid "link stable"
+msgstr "链路稳定"
+
+msgid "24h"
+msgstr "24小时"
+
+msgid "last"
+msgstr "最近"
+
+msgid "Details / history ›"
+msgstr "详情 / 历史 ›"
+
+msgid "Port is unstable (flapping)"
+msgstr "端口不稳定（抖动中）"
+
+msgid "Port is administratively disabled"
+msgstr "端口已被管理员禁用"
+
+msgid "Port is disconnected – cable unplugged or remote side down"
+msgstr "端口已断开 – 网线未插或对端已关闭"
+
+msgid "Port is active"
+msgstr "端口已连接"
+
+msgid "no critical errors"
+msgstr "无严重错误"
+
+msgid "Reset counters and history"
+msgstr "重置计数器和历史"
+
+msgid "This action will clear the flap history and save the current error counter values as a new baseline. Values will restart from zero."
+msgstr "此操作将清除抖动历史并将当前错误计数器值保存为新基准。计数将从零重新开始。"
+
+msgid "Continue?"
+msgstr "是否继续？"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Counters have been reset. Table refreshed."
+msgstr "计数器已重置，表格已刷新。"
+
+msgid "Reset failed"
+msgstr "重置失败"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "Reset error counters and flap history"
+msgstr "重置错误计数器和抖动历史"
+
+msgid "No events yet (history is cleared on restart)."
+msgstr "暂无事件（重启后历史记录会被清除）。"
+
+msgid "UP"
+msgstr "上线"
+
+msgid "DOWN"
+msgstr "下线"
+
+msgid "Counter"
+msgstr "计数器"
+
+msgid "Total"
+msgstr "累计"
+
+msgid "Description"
+msgstr "说明"
+
+msgid "disabled"
+msgstr "已禁用"
+
+msgid "disconnected"
+msgstr "已断开"
+
+msgid "active"
+msgstr "已连接"
+
+msgid "none yet"
+msgstr "暂无"
+
+msgid "Stability"
+msgstr "稳定性"
+
+msgid "Flaps"
+msgstr "抖动次数"
+
+msgid "Last event"
+msgstr "最近事件"
+
+msgid "Loading…"
+msgstr "加载中…"
+
+msgid "Event history"
+msgstr "事件历史"
+
+msgid "Critical error counters (RX)"
+msgstr "严重错误计数器（RX）"
+
+msgid "Critical error counters (TX)"
+msgstr "严重错误计数器（TX）"
+
+msgid "Informational counters"
+msgstr "信息性计数器"
+
+msgid "These counters typically grow without issues – e.g. LLDP/CDP/IPv6 ND. Do not use them to assess port health."
+msgstr "这些计数器在正常情况下也会增长（如 LLDP/CDP/IPv6 ND），请勿用于评估端口健康状态。"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Port diagnostics"
+msgstr "端口诊断"
+
+msgid "Failed to load events"
+msgstr "加载事件失败"
+
+msgid "Sum of all RX errors (CRC, frame, fifo, length, …). If growing, there is a HW/cabling problem."
+msgstr "所有 RX 错误的汇总（CRC、帧、FIFO、长度等）。若持续增长，说明存在硬件或线缆问题。"
+
+msgid "Bad frame checksum. Typically bad cable, EMI interference, faulty connector or NIC."
+msgstr "帧校验和错误。通常由线缆质量差、电磁干扰、接头故障或网卡问题引起。"
+
+msgid "Frame misalignment. Usually bad cable, faulty NIC or duplex mismatch."
+msgstr "帧对齐错误。通常由线缆质量差、网卡故障或双工不匹配引起。"
+
+msgid "NIC FIFO buffer overflow. CPU or bus cannot keep up with incoming traffic."
+msgstr "网卡 FIFO 缓冲区溢出。CPU 或总线处理速度跟不上入站流量。"
+
+msgid "RX ring buffer overflow in driver. Same cause as rx_fifo, different layer."
+msgstr "驱动层 RX 环形缓冲区溢出。原因与 rx_fifo 相同，但发生在不同层次。"
+
+msgid "Packet received physically but Linux kernel dropped it before passing to the network stack (no registered protocol handler)."
+msgstr "物理层已收到数据包，但 Linux 内核在传递到网络栈前将其丢弃（无对应协议处理器）。"
+
+msgid "Most common causes:"
+msgstr "最常见原因："
+
+msgid "LLDP (0x88CC) from managed switch – every 30 s"
+msgstr "来自托管交换机的 LLDP (0x88CC) – 每 30 秒一次"
+
+msgid "STP/RSTP BPDU from switch"
+msgstr "来自交换机的 STP/RSTP BPDU"
+
+msgid "IPv6 ND/RA without active IPv6 listener"
+msgstr "无活跃 IPv6 监听器时收到的 IPv6 ND/RA"
+
+msgid "Packets with VLAN tag the interface cannot decode"
+msgstr "接口无法解码的 VLAN 标签数据包"
+
+msgid "Slow growth (1–5/min) on a port connected to a managed switch is NORMAL. Consider action only when growth > 50/min or sudden spike."
+msgstr "连接到托管交换机的端口缓慢增长（1–5/分钟）属于正常现象。仅当增速超过 50/分钟或出现突然飙升时才需处理。"
+
+msgid "Sum of all TX errors. If growing, there is a problem on the link or NIC."
+msgstr "所有 TX 错误的汇总。若持续增长，说明链路或网卡存在问题。"
+
+msgid "Loss of carrier during transmission. Bad cable, poor connection or sudden link drops."
+msgstr "发送期间丢失载波信号。通常由线缆质量差、连接不良或链路突然中断引起。"
+
+msgid "Transmission aborted – usually after reaching repeated collision limit. Indicates congested or half-duplex segment."
+msgstr "发送中止 – 通常是达到重复碰撞次数上限。表明网段拥塞或处于半双工模式。"
+
+msgid "NIC TX FIFO buffer overflow."
+msgstr "网卡 TX FIFO 缓冲区溢出。"
+
+msgid "Line collisions. Normal on half-duplex. On full-duplex indicates duplex mismatch and a serious problem."
+msgstr "线路碰撞。半双工模式下属正常，全双工模式下表明双工不匹配，是严重问题。"
+
+msgid "Outgoing packet was not sent and kernel dropped it before NIC."
+msgstr "出站数据包未发送，内核在到达网卡之前将其丢弃。"
+
+msgid "Full egress queue at shaper / QoS (htb, tbf, cake)"
+msgstr "整形器/QoS（htb、tbf、cake）出站队列已满"
+
+msgid "No route – missing route to destination"
+msgstr "无路由 – 缺少到目标的路由"
+
+msgid "Interface in admin down during transmission"
+msgstr "发送期间接口处于管理禁用状态"
+
+msgid "Traffic shaping limit or rate-limit on NIC"
+msgstr "流量整形限制或网卡速率限制"
+
+msgid "Sent multicast without registered listeners"
+msgstr "发送了无接收者注册的多播包"
+
+msgid "Under normal operation this value should stay 0 or grow very slowly. A sudden spike indicates congestion or misconfigured QoS."
+msgstr "正常运行时此值应保持为 0 或增长极缓慢。突然飙升表明网络拥塞或 QoS 配置有误。"
+
+msgid "Show error counters for RX/TX columns"
+msgstr "在 RX/TX 列显示错误计数器"
+
+msgid "Instability threshold (flap count per 5 minutes)"
+msgstr "不稳定阈值（每5分钟抖动次数）"
+
+msgid "When this value is exceeded the port is marked as UNSTABLE."
+msgstr "超过此值时端口将被标记为不稳定。"
+
+msgid "(incoming packets)"
+msgstr "（入站数据包）"
+
+msgid "(outgoing packets)"
+msgstr "（出站数据包）"
+
+msgid "Δ refresh"
+msgstr "Δ 刷新间隔"
+
+msgid "Cisco CDP / HP FDP / ExtremeNetworks EDP / Nortel SONMP"
+msgstr "Cisco CDP / HP FDP / ExtremeNetworks EDP / Nortel SONMP"
+
+msgid "MikroTik MNDP (UDP/5678 broadcast)"
+msgstr "MikroTik MNDP (UDP/5678 广播)"

@@ -18,55 +18,55 @@ return view.extend({
 		s.anonymous = true;
 
 		o = s.option(form.Flag, 'default_additional_info',
-			_('Ve vodorovném režimu zobrazit ve výchozím stavu i další informace'));
+			_('Display additional information in horizontal view mode by default'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
 		o = s.option(form.Flag, 'default_h_mode',
-			_('Použít vodorovné zobrazení jako výchozí'));
+			_('Use horizontal view mode by default'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
 		o = s.option(form.Flag, 'hv_mode_switch_button',
-			_('Zobrazit tlačítko pro ruční přepnutí svisle/vodorovně'));
+			_('Show button for manual switching between horizontal/vertical view modes'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
 		o = s.option(form.Flag, 'show_errors',
-			_('Zobrazovat chybové čítače u RX/TX sloupců'));
+			_('Show error counters for RX/TX columns'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
 		o = s.option(form.Value, 'flap_threshold_5m',
-			_('Práh nestability (počet flapů za 5 minut)'),
-			_('Při překročení této hodnoty se port označí jako NESTABILNÍ.'));
+			_('Instability threshold (flap count per 5 minutes)'),
+			_('When this value is exceeded the port is marked as UNSTABLE.'));
 		o.datatype = 'uinteger';
 		o.placeholder = '3';
 		o.default = '3';
 		o.rmempty = false;
 
-		s = m.section(form.GridSection, 'port', _('Seznam portů'));
+		s = m.section(form.GridSection, 'port', _('Port List'));
 		s.sortable = true;
 		s.anonymous = true;
 		s.addremove = true;
 
-		o = s.option(widgets.DeviceSelect, 'ifname', _('rozhraní'));
+		o = s.option(widgets.DeviceSelect, 'ifname', _('interface'));
 		o.multiple = false;
 		o.noaliases = true;
 		o.nobridges = true;
 		o.nocreate = true;
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'name', _('Pojmenování'));
+		o = s.option(form.Value, 'name', _('Nick name'));
 		o.rmempty = true;
 
-		o = s.option(form.ListValue, 'type', _('Typ portu'));
-		o.value('auto',      _('Auto-detekce'));
-		o.value('copper',    _('RJ45 (metalické)'));
+		o = s.option(form.ListValue, 'type', _('Port type'));
+		o.value('auto',      _('Auto detect'));
+		o.value('copper',    _('RJ45'));
 		o.value('sfp',       _('SFP'));
-		o.value('fixed',     _('Pevný spoj'));
-		o.value('wifi',      _('Bezdrátové'));
-		o.value('usb_wifi',  _('USB bezdrátové'));
+		o.value('fixed',     _('Intercircuit fixed link'));
+		o.value('wifi',      _('Wireless'));
+		o.value('usb_wifi',  _('USB Wireless'));
 		o.value('usb_rndis', _('USB RNDIS'));
 		o.value('usb_stick', _('USB modem'));
 		o.value('usb_2g',    _('USB 2G modem'));
@@ -74,12 +74,12 @@ return view.extend({
 		o.value('usb_4g',    _('USB 4G modem'));
 		o.value('gprs',      _('GPRS'));
 		o.value('vpn',       _('VPN'));
-		o.value('tunnel',    _('Tunel'));
+		o.value('tunnel',    _('Tunnel'));
 		o.value('ppp',       _('PPP'));
 		o.default = 'auto';
 		o.rmempty = true;
 
-		o = s.option(form.Flag, 'disable', _('Skrytý'));
+		o = s.option(form.Flag, 'disable', _('Hidden'));
 		o.default = o.disabled;
 		o.editable = true;
 		o.rmempty = true;
